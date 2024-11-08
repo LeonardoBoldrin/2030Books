@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "564804450255",
+    "project_id": "a2030books",
+    "storage_bucket": "a2030books.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564804450255:android:0afbd41c2b051b285684ba",
+        "android_client_info": {
+          "package_name": "com.example.a2030books"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF69UAJK6MgxGMk1MREEjuH1d8vhYrzWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

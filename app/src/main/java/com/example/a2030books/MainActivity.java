@@ -2,27 +2,39 @@ package com.example.a2030books;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.TextUtils;
 import android.view.View;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.a2030books.databinding.ActivityMainBinding;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 
-import android.view.Menu;
-import android.view.MenuItem;
+
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    private Button btnRegister;
+    private Button btnLogin;
+    private EditText fieldEmail;
+    private EditText fieldPassword;
+
+    private FirebaseAuth auth;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,49 +43,91 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        
+        auth = FirebaseAuth.getInstance();
+        
+        fieldEmail = findViewById(R.id.fieldEmail);
+        fieldPassword = findViewById(R.id.fieldPassword);
 
-        /*
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        btnRegister = findViewById(R.id.btnRegister);
+        btnLogin = findViewById(R.id.btnLogin);
+        
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                String contentEmail = fieldEmail.getText().toString();
+                String contentPassword = fieldPassword.getText().toString();
+                
+                loginUser(contentEmail, contentPassword);
             }
         });
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String contentEmail = fieldEmail.getText().toString();
+                String contentPassword = fieldPassword.getText().toString();
+
+                registerUser(contentEmail, contentPassword);
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private void loginUser(String contentEmail, String contentPassword) {
+        if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
+            Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        return super.onOptionsItemSelected(item);
+        auth.signInWithEmailAndPassword(contentEmail, contentPassword)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign-in success
+                        Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        // Redirect to the main app screen or dashboard
+                    } else {
+                        // Sign-in failed; handle specific cases
+                        if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                            // User account with the email does not exist
+                            Toast.makeText(MainActivity.this, "This email is not registered. Please sign up or use a different email.", Toast.LENGTH_LONG).show();
+                        } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                            // Password is incorrect
+                            Toast.makeText(MainActivity.this, "Invalid password. Please try again.", Toast.LENGTH_LONG).show();
+                        } else {
+                            // Other errors
+                            Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-               */
+    private void registerUser(String contentEmail, String contentPassword) {
+        if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
+            Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (contentPassword.length() < 6) {
+            Toast.makeText(MainActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        auth.createUserWithEmailAndPassword(contentEmail, contentPassword)
+                .addOnCompleteListener(MainActivity.this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = auth.getCurrentUser();
+                        Toast.makeText(MainActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        // You can navigate to another activity or update the UI here
+                    } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                        // Email is already in use
+                        Toast.makeText(MainActivity.this, "This email is already registered. Please sign in.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
+
 }
