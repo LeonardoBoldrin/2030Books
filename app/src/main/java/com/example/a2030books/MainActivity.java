@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -102,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private void loginUserAfterSignUp(String email, String password){
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                //vai alla pagina principale con la roba di cambiare activity
+            }
+            else {
+                // Other errors
+                Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void registerUser(String contentEmail, String contentPassword) {
         if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
             Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -118,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = auth.getCurrentUser();
                         Toast.makeText(MainActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        loginUserAfterSignUp(contentEmail, contentPassword);
                         // You can navigate to another activity or update the UI here
                     } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         // Email is already in use

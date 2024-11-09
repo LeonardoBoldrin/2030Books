@@ -59,8 +59,10 @@
         android:ems="10"
         android:hint="email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="228dp" />
+        app:layout_constraintBottom_toTopOf="@+id/fieldPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
     <EditText
         android:id="@+id/fieldPassword"
@@ -69,7 +71,9 @@
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="306dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
