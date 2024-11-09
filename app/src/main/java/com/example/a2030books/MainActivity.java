@@ -1,5 +1,6 @@
 package com.example.a2030books;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -25,9 +26,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
-
     private Button btnRegister;
     private Button btnLogin;
     private EditText fieldEmail;
@@ -39,11 +37,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
         
         auth = FirebaseAuth.getInstance();
         
@@ -86,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign-in success
                         Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        // Redirect to the main app screen or dashboard
+                        // Redirect to the dashboard
+                        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                        startActivity(intent);
                     } else {
                         // Sign-in failed; handle specific cases
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
@@ -103,18 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void loginUserAfterSignUp(String email, String password){
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
-            if (task.isSuccessful()) {
-                //vai alla pagina principale con la roba di cambiare activity
-            }
-            else {
-                // Other errors
-                Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
     private void registerUser(String contentEmail, String contentPassword) {
         if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
             Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -126,13 +109,14 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        // This function also logs in the user
         auth.createUserWithEmailAndPassword(contentEmail, contentPassword)
                 .addOnCompleteListener(MainActivity.this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = auth.getCurrentUser();
+                        //FirebaseUser user = auth.getCurrentUser();
                         Toast.makeText(MainActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        loginUserAfterSignUp(contentEmail, contentPassword);
-                        // You can navigate to another activity or update the UI here
+                        // Redirect to dashboard
+                        redirectToDashboard();
                     } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         // Email is already in use
                         Toast.makeText(MainActivity.this, "This email is already registered. Please sign in.", Toast.LENGTH_SHORT).show();
@@ -141,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void redirectToDashboard(){
+        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+        startActivity(intent);
     }
 
 
