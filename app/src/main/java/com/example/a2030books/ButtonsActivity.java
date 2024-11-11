@@ -17,9 +17,11 @@ public class ButtonsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // https://a2030books-default-rtdb.europe-west1.firebasedatabase.app
-        
+        setContentView(R.layout.activity_buttons);
 
+        // https://a2030books-default-rtdb.europe-west1.firebasedatabase.app
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
 
     }
 }

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         
         auth = FirebaseAuth.getInstance();
+
+        setContentView(R.layout.activity_main);
         
         fieldEmail = findViewById(R.id.fieldEmail);
         fieldPassword = findViewById(R.id.fieldPassword);
