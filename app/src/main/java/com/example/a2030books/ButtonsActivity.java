@@ -1,27 +1,30 @@
 package com.example.a2030books;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ButtonsActivity extends AppCompatActivity {
+
+    private Button btnAddBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_buttons);
 
-        // https://a2030books-default-rtdb.europe-west1.firebasedatabase.app
+        btnAddBook = findViewById(R.id.btnAddBook);
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
+        btnAddBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ButtonsActivity.this, addBookActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
