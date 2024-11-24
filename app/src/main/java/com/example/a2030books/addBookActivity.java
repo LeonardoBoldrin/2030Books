@@ -60,11 +60,10 @@ public class addBookActivity extends AppCompatActivity {
         booksHashMap.put("Name", name);
         booksHashMap.put("Author", author);
 
-        String key = booksRef.push().getKey();
-        booksHashMap.put("PK", key);
+        booksHashMap.put("PK", name);
 
-        if(key != null)
-            booksRef.child(key).setValue(booksHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        if(name != null)
+            booksRef.child(name).setValue(booksHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     Toast.makeText(addBookActivity.this, "Book added succesfully!", Toast.LENGTH_SHORT).show();
