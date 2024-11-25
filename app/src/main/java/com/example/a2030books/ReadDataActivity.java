@@ -1,6 +1,7 @@
 package com.example.a2030books;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class ReadDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityReadDataBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_read_data);
+        setContentView(binding.getRoot());
 
         binding.btnReadData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,7 @@ public class ReadDataActivity extends AppCompatActivity {
                 String bookName = binding.fieldNameData.getText().toString();
                 
                 if(!bookName.isEmpty()){
+                    Log.d("ReadDataActivity", "debug");
                     readData(bookName);
                 }
                 else{
