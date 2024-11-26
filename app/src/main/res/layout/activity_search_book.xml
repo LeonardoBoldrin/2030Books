@@ -7,161 +7,69 @@
     android:layout_height="match_parent"
     tools:context=".ButtonsActivity">
 
-    <EditText
-        android:id="@+id/IBorrow"
-        android:layout_width="234dp"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="411dp"
         android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Date In"
-        android:inputType="text"
+        android:background="@drawable/searchview_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintVertical_bias="0.112" />
 
-    <TextView
-        android:layout_width="54dp"
-        android:layout_height="31dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Book"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="82dp" />
-
-    <EditText
-        android:id="@+id/BookName"
-        android:layout_width="234dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Book Name"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/BorrowIn"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Start of borrow"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="205dp" />
-
-    <TextView
-        android:id="@+id/BorrowOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="End of borrow"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="326dp" />
-
-    <EditText
-        android:id="@+id/OBorrow"
-        android:layout_width="234dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Date Out"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.259"
+        android:stretchColumns="1"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/Price"
-        android:layout_width="57dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Price"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="452dp" />
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Titolo"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/Cost"
-        android:layout_width="234dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Number Price"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551"
-        tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Genere"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/Place"
-        android:layout_width="58dp"
-        android:layout_height="28dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Place"
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="570dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Editore"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/IdPlace"
-        android:layout_width="234dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Insert Place"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691"
-        tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Utente"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnReceive"
-        android:layout_width="150dp"
-        android:layout_height="74dp"
-        android:layout_marginBottom="104dp"
-        android:text="Receive"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Disponibile per"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <!-- Add more TableRows here for each entry -->
+
+
+    </TableLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

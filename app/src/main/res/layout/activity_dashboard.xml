@@ -8,6 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/background_logo"
+    android:scaleType="centerCrop"
+    android:layout_gravity="center"
+    android:contentDescription="background"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
+
     <!-- Main Circle -->
     <View
         android:id="@+id/MainCircle"
@@ -131,46 +143,46 @@
     <!-- Settings Button -->
     <!-- Title -->
 
-    <FrameLayout
-        android:id="@+id/btnSettingsContainer"
-        android:layout_width="60sp"
-        android:layout_height="60sp"
-        android:layout_marginTop="32sp"
-        android:layout_marginEnd="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Settings"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/app_name"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/MainCircle"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0">
 
-    <View
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_circle_shape"
-        android:elevation="8dp"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="32dp"
-        tools:ignore="MissingConstraints" />
+        <FrameLayout
+            android:id="@+id/btnSettingsContainer"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="32dp">
+
+            <View
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/settings_icon" />
+
+            <!-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Settings"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+            <!-->
+        </FrameLayout>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
