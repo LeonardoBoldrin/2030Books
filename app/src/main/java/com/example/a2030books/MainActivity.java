@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.a2030books.R;
 import com.example.a2030books.databinding.ActivityMainBinding;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;

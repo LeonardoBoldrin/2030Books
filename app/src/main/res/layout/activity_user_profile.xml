@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ButtonsActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:contentDescription=" "
+        app:srcCompat="@drawable/circle_shape"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <Button
+        android:id="@+id/btnInformation"
+        android:layout_width="209dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="56dp"
+        android:text="Change Settings"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Email"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <EditText
+        android:id="@+id/emailName"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="e-mail"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <TextView
+        android:id="@+id/Nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Nickname"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="328dp" />
+
+    <EditText
+        android:id="@+id/fieldName"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Insert Nickname"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="312dp" />
+
+    <TextView
+        android:id="@+id/Place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Place"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <EditText
+        android:id="@+id/IdPlace"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Meeting Place"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="377dp" />
+
+    <TextView
+        android:id="@+id/NewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="NewPassword"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="588dp" />
+
+    <EditText
+        android:id="@+id/NewPW"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="New Password"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="572dp" />
+
+    <TextView
+        android:id="@+id/Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Password"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="523dp" />
+
+    <EditText
+        android:id="@+id/PW"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Insert Password"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="507dp" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Time"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="458dp" />
+
+    <EditText
+        android:id="@+id/Hour"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Tempo"
+        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

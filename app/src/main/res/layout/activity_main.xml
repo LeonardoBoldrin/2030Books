@@ -15,10 +15,11 @@
         android:text="Registrati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldPassword"
-        app:layout_constraintVertical_bias="0.21" />
+        app:layout_constraintVertical_bias="0.236"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -27,10 +28,11 @@
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toEndOf="@+id/btnRegister"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.511"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/fieldEmail"
@@ -42,7 +44,8 @@
         app:layout_constraintBottom_toTopOf="@+id/fieldPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,HardcodedText" />
 
     <EditText
         android:id="@+id/fieldPassword"
@@ -57,6 +60,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintVertical_bias="0.282"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
