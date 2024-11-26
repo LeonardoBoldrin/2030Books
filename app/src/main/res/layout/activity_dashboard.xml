@@ -187,8 +187,4 @@
             android:elevation="8dp" />
     </FrameLayout>
 
-    <!-- Settings Button -->
-    <!-- Title -->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,7 +76,5 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <!-- Add more TableRows here for each entry -->
-
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
