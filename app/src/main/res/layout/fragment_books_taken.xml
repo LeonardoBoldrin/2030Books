@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="Da Restituire"
+                android:text="'Il libro d'oro'"
                 android:textColor="@color/darkGreen"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -81,7 +81,32 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="Autore"
+                android:text="Benedetta Rossi"
+                android:textColor="@color/darkGreen"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <!-- Riga: Genere -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Restituire a:"
+                android:textColor="@color/darkGreen"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Kyosk09"
                 android:textColor="@color/darkGreen"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -97,7 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Scadenza:"
+                android:text="Entro:"
                 android:textColor="@color/darkGreen"
                 android:textSize="20dp" />
 
@@ -106,10 +131,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="Entro 9 giorni"
+                android:text="9 giorni"
                 android:textColor="@color/darkGreen"
                 android:textSize="20dp" />
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

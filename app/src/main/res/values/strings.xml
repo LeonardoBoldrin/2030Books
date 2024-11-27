@@ -43,4 +43,26 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+    <string-array name="genere_options">
+        <item>Fiction</item>
+        <item>Non-Fiction</item>
+        <item>Science Fiction</item>
+        <item>Fantasy</item>
+        <item>Biography</item>
+        <item>Mystery</item>
+    </string-array>
+
+    <string-array name="editore_options">
+        <item>Mondadori</item>
+        <item>Einaudi</item>
+        <item>Feltrinelli</item>
+        <item>Giunti</item>
+        <item>Laterza</item>
+        <item>Rizzoli</item>
+        <item>Garzanti</item>
+        <item>Salani</item>
+    </string-array>
+
+
 </resources>

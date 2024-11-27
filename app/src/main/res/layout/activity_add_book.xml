@@ -5,21 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/logo_background"
+        android:src="@drawable/background_logo"
         android:scaleType="centerCrop"
         android:layout_gravity="center"
-        android:contentDescription="background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
 
     <EditText
         android:id="@+id/nome"
@@ -40,43 +37,38 @@
         android:id="@+id/editore"
         android:layout_width="373dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/border_background"
-        android:prompt="@string/editore_prompt"
+        android:entries="@array/editore_options"
         android:textColor="@color/darkGreen"
-        android:outlineAmbientShadowColor="@color/darkGreen"
-        android:outlineSpotShadowColor="@color/darkGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nome"
-        app:layout_constraintWidth_percent="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/nome" />
 
     <Spinner
         android:id="@+id/genere"
         android:layout_width="373dp"
         android:layout_height="48dp"
-        android:layout_marginTop="28dp"
         android:background="@drawable/border_background"
-        android:prompt="@string/genere_prompt"
+        android:entries="@array/genere_options"
         android:textColor="@color/darkGreen"
-        android:outlineAmbientShadowColor="@color/darkGreen"
-        android:outlineSpotShadowColor="@color/darkGreen"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupDisponibilePer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editore"
-        app:layout_constraintWidth_percent="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/editore" />
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
         android:text="Disponibile per: "
         android:textColor="@color/darkGreen"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/genere" />
 
