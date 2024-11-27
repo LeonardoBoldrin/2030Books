@@ -16,7 +16,7 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:ignore="HardcodedText,MissingConstraints"
+        tools:ignore="HardcodedText"
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="225dp" />
 

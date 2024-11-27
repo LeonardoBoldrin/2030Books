@@ -12,7 +12,8 @@ import android.view.View;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.a2030books.R;
-import com.example.a2030books.databinding.ActivityMainBinding;
+import com.example.a2030books.databinding.ActivityLoginBinding;
+import com.example.a2030books.databinding.LoginBinding;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText fieldPassword;
 
     private FirebaseAuth auth;
-    
+    private ActivityLoginBinding binding;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +44,8 @@ public class MainActivity extends AppCompatActivity {
         
         auth = FirebaseAuth.getInstance();
 
-        setContentView(R.layout.activity_main);
-        
-        fieldEmail = findViewById(R.id.fieldEmail);
-        fieldPassword = findViewById(R.id.fieldPassword);
-
-        btnRegister = findViewById(R.id.btnRegister);
-        btnLogin = findViewById(R.id.btnLogin);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String contentEmail = fieldEmail.getText().toString();
                 String contentPassword = fieldPassword.getText().toString();
-
-                registerUser(contentEmail, contentPassword);
             }
         });
 
@@ -99,40 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void registerUser(String contentEmail, String contentPassword) {
-        if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
-            Toast.makeText(MainActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (contentPassword.length() < 6) {
-            Toast.makeText(MainActivity.this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // This function also logs in the user
-        auth.createUserWithEmailAndPassword(contentEmail, contentPassword)
-                .addOnCompleteListener(MainActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        //FirebaseUser user = auth.getCurrentUser();
-                        Toast.makeText(MainActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        // Redirect to dashboard
-                        redirectToDashboard();
-                    } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                        // Email is already in use
-                        Toast.makeText(MainActivity.this, "This email is already registered. Please sign in.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void redirectToDashboard(){
-        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-        startActivity(intent);
     }
 
 
