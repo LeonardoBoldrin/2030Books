@@ -37,11 +37,12 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="end"
-            android:layout_marginEnd="32dp">
+            android:layout_marginEnd="21dp"
+            >
 
             <View
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/settings_icon" />
 
         </FrameLayout>
@@ -50,142 +51,32 @@
             android:id="@+id/btnHome"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/home_icon"
-            />
+            android:background="@drawable/home_icon" />
 
 
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/background_logo"
-    android:scaleType="centerCrop"
-    android:layout_gravity="center"
-    android:contentDescription="background"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
-
-    <!-- Main Circle -->
-    <View
-        android:id="@+id/MainCircle"
-        android:layout_width="230dp"
-        android:layout_height="230dp"
-        android:background="@drawable/circle_shape"
-        android:elevation="4dp"
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:contentDescription="background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Buttons -->
-    <FrameLayout
-        android:id="@+id/btnGiveContainer"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324"
-        android:layout_marginStart="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Bring"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
-
-        <View
-            android:id="@+id/btnGive"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/btnReceiveContainer"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="411dp"
+        android:layout_height="666dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324"
-        android:layout_marginEnd="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Receive"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/btnAddBookContainer"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592"
-        android:layout_marginStart="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Add Book"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/btnSearchBookContainer"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592"
-        android:layout_marginEnd="32dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Search"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            tools:ignore="HardcodedText" />
-
-        <View
-            android:id="@+id/btnLookForBooks"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
