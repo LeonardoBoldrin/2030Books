@@ -23,6 +23,7 @@ public class DashboardActivity extends AppCompatActivity {
         tvPosition = findViewById(R.id.tvPosition);
 
         tvPosition.setText("Home");
+        /*
 
         btnGive = findViewById(R.id.btnGive);
 
@@ -44,6 +45,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-
+        */
     }
+
 }

@@ -30,9 +30,10 @@ public class addBookActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_book);
 
+        /*
         fieldName = findViewById(R.id.fieldName);
         fieldAuthor = findViewById(R.id.fieldAuthor);
-        btnConfirm = findViewById(R.id.btnConfirm);
+        btnConfirm = findViewById(R.id.btnConfirm);*/
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.a2030books.R;
 import com.example.a2030books.databinding.ActivityLoginBinding;
-import com.example.a2030books.databinding.LoginBinding;
+import com.example.a2030books.databinding.ActivityLoginBinding;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -28,11 +28,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRegister;
-    private Button btnLogin;
-    private EditText fieldEmail;
-    private EditText fieldPassword;
-
     private FirebaseAuth auth;
     private ActivityLoginBinding binding;
 
@@ -46,24 +41,23 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contentEmail = fieldEmail.getText().toString();
-                String contentPassword = fieldPassword.getText().toString();
+                String contentEmail = binding.usernameInput.getText().toString();
+                String contentPassword = binding.passwordInput.getText().toString();
                 
                 loginUser(contentEmail, contentPassword);
             }
         });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+/*
+        binding.createAccBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contentEmail = fieldEmail.getText().toString();
-                String contentPassword = fieldPassword.getText().toString();
+
             }
-        });
+        });*/
 
     }
 
@@ -95,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+
     }
 
 

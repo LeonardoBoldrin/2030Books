@@ -9,26 +9,13 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/remake1"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:contentDescription="background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <!-- android:background="#724D11" -->
 
     <LinearLayout
-        android:layout_width="342dp"
-        android:layout_height="606dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="40dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="vertical">
 

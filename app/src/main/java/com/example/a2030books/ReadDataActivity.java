@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a2030books.databinding.ActivityReadDataBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -17,12 +16,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ReadDataActivity extends AppCompatActivity {
 
-    private ActivityReadDataBinding binding;
+   // private ActivityReadDataBinding binding;
     DatabaseReference db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+        /*
         binding = ActivityReadDataBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -77,6 +79,6 @@ public class ReadDataActivity extends AppCompatActivity {
             }
         });
 
-
+*/
     }
 }
