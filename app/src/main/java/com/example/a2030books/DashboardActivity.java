@@ -23,6 +23,8 @@ public class DashboardActivity extends AppCompatActivity {
         tvPosition = findViewById(R.id.tvPosition);
 
         tvPosition.setText("Home");
+
+
         /*
 
         btnGive = findViewById(R.id.btnGive);
@@ -32,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnGive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, ButtonsActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, .class);
                 startActivity(intent);
             }
         });
@@ -40,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
         btnLookForBooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, ReadDataActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, .class);
                 startActivity(intent);
             }
         });
