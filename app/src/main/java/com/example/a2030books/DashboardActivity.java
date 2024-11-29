@@ -1,53 +1,47 @@
 package com.example.a2030books;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.a2030books.R;
+import com.example.a2030books.databinding.ActivityDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private View btnGive;
-    private View btnLookForBooks;
+    private ActivityDashboardBinding binding;
     private TextView tvPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_dashboard);
+        binding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         tvPosition = findViewById(R.id.tvPosition);
 
         tvPosition.setText("Home");
 
-
-        /*
-
-        btnGive = findViewById(R.id.btnGive);
-
-        btnLookForBooks = findViewById(R.id.btnLookForBooks);
-
-        btnGive.setOnClickListener(new View.OnClickListener() {
+        binding.btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, .class);
-                startActivity(intent);
+                loadFragment(new DashboardButtonsFragment());
             }
         });
 
-        btnLookForBooks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DashboardActivity.this, .class);
-                startActivity(intent);
-            }
-        });
-
-        */
+        loadFragment(new DashboardButtonsFragment());
     }
 
+    // Reusable method for fragment transactions
+    public void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment)
+                .addToBackStack(null) // Adds to back stack for navigation
+                .commit();
+    }
 }

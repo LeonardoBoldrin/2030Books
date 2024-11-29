@@ -19,6 +19,7 @@
         />
 
     <!-- Buttons -->
+
     <FrameLayout
         android:id="@+id/btnGiveContainer"
         android:layout_width="100dp"
@@ -28,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.325"
         android:layout_marginStart="32dp">
+
         <TextView
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -35,14 +37,15 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:background="@drawable/offer"
-            tools:ignore="HardcodedText" />
+            android:elevation="1dp"
+              />
 
         <View
             android:id="@+id/btnGive"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
+            android:elevation="1dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -62,13 +65,13 @@
             android:textStyle="bold"
             android:textSize="16sp"
             android:background="@drawable/take"
-            tools:ignore="HardcodedText" />
+            android:elevation="1dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
+            android:elevation="1dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -85,13 +88,13 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:background="@drawable/add"
-            tools:ignore="HardcodedText" />
+            android:elevation="1dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
+            android:elevation="1dp" />
     </FrameLayout>
 
     <FrameLayout
@@ -108,14 +111,14 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:background="@drawable/search"
-            tools:ignore="HardcodedText" />
+            android:elevation="1dp"/>
 
         <View
             android:id="@+id/btnLookForBooks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/btn_circle_shape"
-            android:elevation="8dp" />
+            android:elevation="1dp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
