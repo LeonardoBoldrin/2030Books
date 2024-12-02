@@ -17,20 +17,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AddBookActivity extends AppCompatActivity {
 
     private ActivityAddBookBinding binding;
 
     private String selectedTitle;
+    private String selectedAuthor;
     private Spinner srPublisher;
     private String selectedPublisher;
     private Spinner srGenre;
-    private String selectGenre;
+    private String selectedGenre;
     private String selectedAvailability;
     private float selectedPrice;
 
@@ -41,11 +44,6 @@ public class AddBookActivity extends AppCompatActivity {
 
         binding = ActivityAddBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // _________________________________________________________________________________________
-        // Nome
-
-        selectedTitle = binding.etTitle.getText().toString();
 
         // _________________________________________________________________________________________
         // Editore
@@ -83,7 +81,7 @@ public class AddBookActivity extends AppCompatActivity {
         ArrayAdapter<String> genreAdapter = getStringArrayAdapter(new String[]{
                 "Seleziona un genere", "Giallo", "Rosa", "Horror", "Fantasy",
                 "Fantascientifico", "Storico", "Umoristico",
-                "Avventura", "Auto/Biografia"});
+                "Avventura", "Auto_Biografia"});
 
         // Attach the adapter to the spinner
         srGenre.setAdapter(genreAdapter);
@@ -95,7 +93,7 @@ public class AddBookActivity extends AppCompatActivity {
                 // Handle the selection of a valid genre
                 srGenre.setSelection(position);
 
-                selectGenre = parent.getItemAtPosition(position).toString();
+                selectedGenre = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -124,14 +122,37 @@ public class AddBookActivity extends AppCompatActivity {
             }
         });
 
-        String priceString = binding.etPrezzoCauzione.getText().toString();
-        selectedPrice = Float.parseFloat(priceString);
-
         // _________________________________________________________________________________________
 
         binding.btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                selectedTitle = binding.etTitle.getText().toString();
+
+                if(selectedTitle.isEmpty()){
+                    Toast.makeText(AddBookActivity.this, "Please enter a valid title", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                selectedAuthor = binding.etAuthor.getText().toString();
+
+                if(selectedAuthor.isEmpty()){
+                    Toast.makeText(AddBookActivity.this, "Please enter a valid author", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //__________________________________________________________________________________
+
+                String priceString = binding.etPrezzoCauzione.getText().toString();
+
+                if (priceString.isEmpty()) {
+                    Toast.makeText(AddBookActivity.this, "Please enter a valid price", Toast.LENGTH_SHORT).show();
+                    return; // Stop further processing
+                } else {
+                    selectedPrice = Float.parseFloat(priceString);
+                }
+
                 addBookToDb();
             }
         });
@@ -159,11 +180,27 @@ public class AddBookActivity extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference booksRef = db.getReference("Books");
 
-        HashMap<String, Object> booksHashMap = new HashMap<>();
-        booksHashMap.put("Titolo", selectedTitle);
-        booksHashMap.put("Editore", selectedPublisher);
-        booksHashMap.put("Genere", selectGenre);
-        booksHashMap.put("Prezzo", selectedPrice);
+        HashMap<String, Object> userBookDetails = new HashMap<>();
+        userBookDetails.put("Availability", selectedAvailability);
+        userBookDetails.put("Price", selectedPrice);
+        userBookDetails.put("Author", selectedAuthor);
+
+        // requireNonNull() serve a eliminare un warning su getUid() che potrebbe essere null,
+        // anche se sicuramente sarà loggato per essere qua
+        String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+        booksRef.child(selectedGenre)
+                .child(selectedPublisher)
+                .child(selectedTitle)
+                .child(user)
+                .setValue(userBookDetails)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(AddBookActivity.this, "Failed to add book: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
        
     }

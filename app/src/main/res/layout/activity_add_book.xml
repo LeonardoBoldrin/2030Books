@@ -8,149 +8,182 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/background_logo"
-        android:scaleType="centerCrop"
         android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nuovo Inserimento"
-        android:textColor="@color/darkGreen"
-        android:textSize="44dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etTitle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/insideMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2">
 
-    <EditText
-        android:id="@+id/etTitle"
-        android:layout_width="373dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
-        android:hint="Titolo"
-        android:inputType="textPersonName"
-        android:textColor="@color/darkGreen"
-        android:textColorHint="@color/darkGreen"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="1.0" />
-
-    <Spinner
-        android:id="@+id/srPublisher"
-        android:layout_width="373dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/border_background"
-        android:entries="@array/editore_options"
-        android:textColor="@color/darkGreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etTitle" />
-
-    <Spinner
-        android:id="@+id/srGenre"
-        android:layout_width="373dp"
-        android:layout_height="48dp"
-        android:background="@drawable/border_background"
-        android:entries="@array/genere_options"
-        android:textColor="@color/darkGreen"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroupDisponibilePer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/srPublisher" />
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Disponibile per: "
-        android:textColor="@color/darkGreen"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/srGenre" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupDisponibilePer"
-        android:layout_width="225dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="376dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.897"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/vendita"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Vendita"
+            android:text="Nuovo Inserimento"
+            android:textColor="@color/darkGreen"
+            android:textSize="44dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/etTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.035" />
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:hint="Titolo"
+            android:inputType="textPersonName"
             android:textColor="@color/darkGreen"
             android:textColorHint="@color/darkGreen"
-            android:textSize="15dp" />
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1.0" />
 
-        <RadioButton
-            android:id="@+id/prestito"
-            android:layout_width="0dp"
+
+        <EditText
+            android:id="@+id/etAuthor"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Prestito"
+            android:layout_marginTop="20dp"
+            android:hint="Autore"
+            android:inputType="textPersonName"
             android:textColor="@color/darkGreen"
             android:textColorHint="@color/darkGreen"
-            android:textSize="15dp" />
-    </RadioGroup>
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etTitle"
+            app:layout_constraintWidth_percent="1.0" />
+
+        <Spinner
+            android:id="@+id/srPublisher"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="88dp"
+            android:background="@drawable/border_background"
+            android:entries="@array/editore_options"
+            android:textColor="@color/darkGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etTitle" />
+
+        <Spinner
+            android:id="@+id/srGenre"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/border_background"
+            android:entries="@array/genere_options"
+            android:textColor="@color/darkGreen"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroupDisponibilePer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/srPublisher" />
 
 
-    <EditText
-        android:id="@+id/etPrezzoCauzione"
-        android:layout_width="373dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="Prezzo/Cauzione"
-        android:inputType="numberDecimal"
-        android:textColor="@color/darkGreen"
-        android:textColorHint="@color/darkGreen"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroupDisponibilePer"
-        app:layout_constraintWidth_percent="1.0" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="125dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="52dp"
+            android:text="Disponibile per: "
+            android:textColor="@color/darkGreen"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/etPrezzoCauzione"
+            app:layout_constraintEnd_toStartOf="@+id/radioGroupDisponibilePer"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/srGenre"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnAddBook"
-        android:layout_width="220dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="96dp"
-        android:backgroundTint="@color/green"
-        android:padding="18dp"
-        android:text="Aggiungi"
-        android:textColor="@color/darkGreen"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPrezzoCauzione" />
+        <RadioGroup
+            android:id="@+id/radioGroupDisponibilePer"
+            android:layout_width="225dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="376dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.897"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <RadioButton
+                android:id="@+id/vendita"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Vendita"
+                android:textColor="@color/darkGreen"
+                android:textColorHint="@color/darkGreen"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/prestito"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Prestito"
+                android:textColor="@color/darkGreen"
+                android:textColorHint="@color/darkGreen"
+                android:textSize="15dp" />
+        </RadioGroup>
+
+
+        <EditText
+            android:id="@+id/etPrezzoCauzione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Prezzo/Cauzione"
+            android:inputType="numberDecimal"
+            android:textColor="@color/darkGreen"
+            android:textColorHint="@color/darkGreen"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroupDisponibilePer"
+            app:layout_constraintWidth_percent="1.0" />
+
+        <Button
+            android:id="@+id/btnAddBook"
+            android:layout_width="220dp"
+            android:layout_height="81dp"
+            android:backgroundTint="@color/green"
+            android:padding="18dp"
+            android:text="Aggiungi"
+            android:textColor="@color/darkGreen"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPrezzoCauzione" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
