@@ -174,46 +174,30 @@ public class AddBookActivity extends AppCompatActivity {
         // _________________________________________________________________________________________
 
     private void addBookToDb() {
+
+        HashMap<String, Object> bookDetails = new HashMap<>();
+        bookDetails.put("Author", selectedAuthor);
+        bookDetails.put("Genre", selectedGenre);
+        bookDetails.put("Publisher", selectedPublisher);
+        bookDetails.put("Availability", selectedAvailability);
+        bookDetails.put("Price", selectedPrice);
+
         // https://a2030books-default-rtdb.europe-west1.firebasedatabase.app
 
         FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
-        DatabaseReference booksRef = db.getReference("Books");
-
-        HashMap<String, Object> userBookDetails = new HashMap<>();
-        userBookDetails.put("Title", selectedTitle);
-        userBookDetails.put("Author", selectedAuthor);
-        userBookDetails.put("Genre", selectedGenre);
-        userBookDetails.put("Publisher", selectedPublisher);
-        userBookDetails.put("Availability", selectedAvailability);
-        userBookDetails.put("Price", selectedPrice);
-
-        String key = booksRef.push().getKey();
 
         DatabaseReference usersRef = db.getReference("Users");
-
-        HashMap<String, String> usersUploads = new HashMap<>();
-        usersUploads.put("key", key);
-
         usersRef.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                .child("Uploads")
-                .child(selectedTitle).setValue(usersUploads);
-
-        if(key != null) {
-            booksRef.child(key)
-                    .setValue(userBookDetails)
+                .child("Books")
+                .child(selectedTitle).setValue(bookDetails)
                     .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddBookActivity.this, DashboardActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(AddBookActivity.this, "Failed to add book: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-        else
-            Toast.makeText(AddBookActivity.this, "Key = null!", Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(AddBookActivity.this, DashboardActivity.class);
+                                startActivity(intent);
+                            } else
+                                Toast.makeText(AddBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
 
-       
+                    });
     }
 }
