@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.a2030books.databinding.FragmentBooksGivenBinding;
 
+
 public class BooksGivenFragment extends Fragment {
 
     private FragmentBooksGivenBinding binding;
@@ -32,8 +33,14 @@ public class BooksGivenFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         binding = FragmentBooksGivenBinding.inflate(inflater, container, false);
+
+        // populate the table in the recycler view item
+
+
+
+        //__________________________________________________________________________________________
 
         binding.btnMyBooks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,5 +50,7 @@ public class BooksGivenFragment extends Fragment {
         });
 
         return binding.getRoot();
+
     }
 }
+

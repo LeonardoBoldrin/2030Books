@@ -1,5 +1,6 @@
 package com.example.a2030books;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,8 +16,6 @@ import com.example.a2030books.databinding.ActivityAddBookBinding;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -181,26 +180,39 @@ public class AddBookActivity extends AppCompatActivity {
         DatabaseReference booksRef = db.getReference("Books");
 
         HashMap<String, Object> userBookDetails = new HashMap<>();
+        userBookDetails.put("Title", selectedTitle);
+        userBookDetails.put("Author", selectedAuthor);
+        userBookDetails.put("Genre", selectedGenre);
+        userBookDetails.put("Publisher", selectedPublisher);
         userBookDetails.put("Availability", selectedAvailability);
         userBookDetails.put("Price", selectedPrice);
 
-        // requireNonNull() serve a eliminare un warning su getUid() che potrebbe essere null,
-        // anche se sicuramente sarà loggato per essere qua
-        String user = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String key = booksRef.push().getKey();
 
-        booksRef.child(selectedGenre)
-                .child(selectedPublisher)
-                .child(selectedTitle)
-                .child(selectedAuthor)
-                .child(user)
-                .setValue(userBookDetails)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(AddBookActivity.this, "Failed to add book: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        DatabaseReference usersRef = db.getReference("Users");
+
+        HashMap<String, String> usersUploads = new HashMap<>();
+        usersUploads.put("key", key);
+
+        usersRef.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                .child("Uploads")
+                .child(selectedTitle).setValue(usersUploads);
+
+        if(key != null) {
+            booksRef.child(key)
+                    .setValue(userBookDetails)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddBookActivity.this, DashboardActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(AddBookActivity.this, "Failed to add book: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+        else
+            Toast.makeText(AddBookActivity.this, "Key = null!", Toast.LENGTH_SHORT).show();
 
        
     }
