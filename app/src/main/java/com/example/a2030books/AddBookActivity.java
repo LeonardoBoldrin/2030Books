@@ -183,7 +183,6 @@ public class AddBookActivity extends AppCompatActivity {
         HashMap<String, Object> userBookDetails = new HashMap<>();
         userBookDetails.put("Availability", selectedAvailability);
         userBookDetails.put("Price", selectedPrice);
-        userBookDetails.put("Author", selectedAuthor);
 
         // requireNonNull() serve a eliminare un warning su getUid() che potrebbe essere null,
         // anche se sicuramente sarà loggato per essere qua
@@ -192,6 +191,7 @@ public class AddBookActivity extends AppCompatActivity {
         booksRef.child(selectedGenre)
                 .child(selectedPublisher)
                 .child(selectedTitle)
+                .child(selectedAuthor)
                 .child(user)
                 .setValue(userBookDetails)
                 .addOnCompleteListener(task -> {

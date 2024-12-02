@@ -51,6 +51,13 @@ public class DashboardButtonsFragment extends Fragment {
             }
         });
 
+        binding.btnGiveContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((DashboardActivity) requireActivity()).loadFragment(new BooksTakenFragment());
+            }
+        });
+
         return binding.getRoot();
     }
 }
