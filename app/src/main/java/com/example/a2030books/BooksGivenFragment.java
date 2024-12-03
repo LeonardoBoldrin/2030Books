@@ -4,11 +4,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.a2030books.databinding.FragmentBooksGivenBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseError;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class BooksGivenFragment extends Fragment {
@@ -36,10 +48,6 @@ public class BooksGivenFragment extends Fragment {
 
         binding = FragmentBooksGivenBinding.inflate(inflater, container, false);
 
-        // populate the table in the recycler view item
-
-
-
         //__________________________________________________________________________________________
 
         binding.btnMyBooks.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +58,6 @@ public class BooksGivenFragment extends Fragment {
         });
 
         return binding.getRoot();
-
     }
 }
 
