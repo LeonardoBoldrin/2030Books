@@ -3,6 +3,7 @@ package com.example.a2030books;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
     private String email;
     private String age;
     private String place;
+    // private String day;
+    // private String hour;
     private String tel;
     private String pwd;
 
@@ -35,31 +38,36 @@ public class RegisterActivity extends AppCompatActivity {
         place = binding.etPlace.getText().toString();
         tel = binding.etPhone.getText().toString();
         pwd = binding.etPassword.getText().toString();
+        // day = binding.etDay.getText().toString();
+        // hour = binding.etHour.getText().toString();
+
+        String[] data = new String[]{email, pwd, nickname, age, place /*, day, hour*/, tel};
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.newAccBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerUser(data);
+            }
+        });
     }
 
-    private void registerUser(String contentEmail, String contentPassword) {
-        if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
-            Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
+    private void registerUser(String[] data) {
 
-        if (contentPassword.length() < 8) {
-            Toast.makeText(RegisterActivity.this, "Password must be at least 8 characters", Toast.LENGTH_SHORT).show();
-            return;
+        for(String el : data){
+            if(el.isEmpty())
+                Toast.makeText(RegisterActivity.this, "Compila tutti i campi", Toast.LENGTH_SHORT).show();
         }
 
         // This function also logs in the user
-        auth.createUserWithEmailAndPassword(contentEmail, contentPassword)
+        auth.createUserWithEmailAndPassword(data[1], data[2])
                 .addOnCompleteListener(RegisterActivity.this, task -> {
                     if (task.isSuccessful()) {
-                        //FirebaseUser user = auth.getCurrentUser();
                         Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        // Redirect to dashboard
-                        Intent intent = new Intent(RegisterActivity.this, DashboardActivity.class);
-                        startActivity(intent);
+                        // creates the "Info" node in the db
+                        // createInfoNode(data)
                     } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         // Email is already in use
                         Toast.makeText(RegisterActivity.this, "This email is already registered. Please sign in.", Toast.LENGTH_SHORT).show();

@@ -49,7 +49,14 @@ public class DashboardButtonsFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddBookActivity.class);
                 startActivity(intent);
-                ((DashboardActivity) requireActivity()).changePositionText("Aggiungi libro");
+            }
+        });
+
+        binding.btnLookForBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchBookActivity.class);
+                startActivity(intent);
             }
         });
 
