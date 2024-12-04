@@ -40,6 +40,8 @@ public class DashboardButtonsFragment extends Fragment {
         binding.btnGive.setOnClickListener(v -> {
             // Use the activity's loadFragment method to switch to FragmentB
             ((DashboardActivity) requireActivity()).loadFragment(new BooksGivenFragment());
+            ((DashboardActivity) requireActivity()).changePositionText("Prestiti");
+
         });
 
         binding.btnAddBookContainer.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +49,7 @@ public class DashboardButtonsFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddBookActivity.class);
                 startActivity(intent);
+                ((DashboardActivity) requireActivity()).changePositionText("Aggiungi libro");
             }
         });
 

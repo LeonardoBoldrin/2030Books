@@ -35,14 +35,15 @@
 
     <Button
         android:id="@+id/btnMyBooks"
-        android:layout_width="220dp"
-        android:layout_height="81dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/green"
-        android:padding="18dp"
         android:text="I miei libri"
         android:textColor="@color/darkGreen"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:padding="30dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

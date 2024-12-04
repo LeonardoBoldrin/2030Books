@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/holo_green_dark"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -32,27 +32,19 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <FrameLayout
-            android:id="@+id/btnSettingsContainer"
+        <View
+            android:id="@+id/vSettings"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="end"
             android:layout_marginEnd="21dp"
-            >
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/settings_icon" />
-
-        </FrameLayout>
+            android:background="@drawable/settings_icon" />
 
         <View
-            android:id="@+id/btnHome"
+            android:id="@+id/vHome"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/home_icon" />
-
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -63,6 +55,7 @@
         android:layout_gravity="center"
         android:contentDescription="background"
         android:scaleType="centerCrop"
+        android:elevation="0dp"
         android:src="@drawable/background_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +65,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:layout_width="match_parent"
-        android:layout_height="666dp"
+        android:layout_height="672dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView"

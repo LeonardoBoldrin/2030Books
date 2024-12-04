@@ -1,174 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Email"
+        android:text="E-mail"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="10dp"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:elevation="1dp"
-        tools:ignore="HardcodedText"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="225dp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/Nickname"
+        app:layout_constraintEnd_toStartOf="@+id/etEmail"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/PW"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:ems="10"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:inputType="text"
-        android:text="Insert Password"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="473dp" />
+        app:layout_constraintBottom_toTopOf="@+id/NewPW"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/fieldName"
-        android:layout_width="149dp"
-        android:layout_height="48dp"
+        android:id="@+id/etNickname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Insert Nickname"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="272dp" />
+        app:layout_constraintBottom_toTopOf="@+id/IdPlace"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/Nickname"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="10dp"
         android:text="Nickname"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="292dp" />
+        app:layout_constraintBottom_toTopOf="@+id/Place"
+        app:layout_constraintEnd_toStartOf="@+id/etNickname"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/emailName"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:ems="10"
+        android:id="@+id/etEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:inputType="text"
-        android:text="e-mail"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="205dp" />
+        app:layout_constraintBottom_toTopOf="@+id/etNickname"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/IdPlace"
-        android:layout_width="149dp"
-        android:layout_height="48dp"
-        android:ems="10"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:inputType="text"
-        android:text="Meeting Place"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="339dp" />
+        app:layout_constraintBottom_toTopOf="@+id/Hour"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/NewPW"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:ems="10"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
         android:inputType="text"
-        android:text="New Password"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="540dp" />
+        app:layout_constraintBottom_toTopOf="@+id/newAcc_btn"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/Hour"
-        android:layout_width="148dp"
-        android:layout_height="48dp"
-        android:ems="10"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
         android:inputType="text"
-        android:text="Tempo"
-        tools:ignore="Autofill,HardcodedText,LabelFor,MissingConstraints,TextFields"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="406dp" />
+        app:layout_constraintBottom_toTopOf="@+id/PW"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/Time"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Time"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="10dp"
+        android:text="Ora"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="427dp" />
+        app:layout_constraintBottom_toTopOf="@+id/Password"
+        app:layout_constraintEnd_toStartOf="@+id/Hour"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Password"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="10dp"
         android:text="Password"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="494dp" />
+        app:layout_constraintBottom_toTopOf="@+id/NewPassword"
+        app:layout_constraintEnd_toStartOf="@+id/PW"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/NewPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="NewPassword"
+        android:layout_marginBottom="67dp"
+        android:layout_marginStart="10dp"
+        android:text="Nuova password"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="561dp" />
+        app:layout_constraintBottom_toTopOf="@+id/newAcc_btn"
+        app:layout_constraintEnd_toStartOf="@+id/NewPW"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Place"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Place"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="10dp"
+        android:text="Posto"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="360dp" />
+        app:layout_constraintBottom_toTopOf="@+id/Time"
+        app:layout_constraintEnd_toStartOf="@+id/IdPlace"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/newAcc_btn"
@@ -182,15 +161,14 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
         app:layout_constraintVertical_bias="0.975" />
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -198,6 +176,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintVertical_bias="0.028" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

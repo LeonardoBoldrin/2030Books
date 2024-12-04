@@ -25,12 +25,20 @@ public class DashboardActivity extends AppCompatActivity {
 
         tvPosition = findViewById(R.id.tvPosition);
 
-        tvPosition.setText("Home");
-
-        binding.btnHome.setOnClickListener(new View.OnClickListener() {
+        binding.vHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loadFragment(new DashboardButtonsFragment());
+                changePositionText("Home");
+            }
+        });
+
+        binding.vSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadFragment(new UserProfileFragment());
+
+                changePositionText("Impostazioni");
             }
         });
 
@@ -43,5 +51,9 @@ public class DashboardActivity extends AppCompatActivity {
                 .replace(R.id.fragmentContainerView, fragment)
                 .addToBackStack(null) // Adds to back stack for navigation
                 .commit();
+    }
+
+    public void changePositionText(String text){
+        binding.tvPosition.setText(text);
     }
 }
