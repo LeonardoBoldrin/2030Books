@@ -15,37 +15,42 @@
         android:background="@android:color/holo_green_dark"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         android:elevation="1dp">
 
-        <TextView
-            android:id="@+id/tvPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Home"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+        <!-- Usa un FrameLayout per gestire gli elementi all'interno della Toolbar -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/vSettings"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="21dp"
-            android:background="@drawable/settings_icon" />
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Home"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-        <View
-            android:id="@+id/vHome"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/home_icon" />
+            <View
+                android:id="@+id/vSettings"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="21dp"
+                android:background="@drawable/settings_icon" />
 
+            <View
+                android:id="@+id/vHome"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="start"
+                android:background="@drawable/home_icon" />
+
+        </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
@@ -65,11 +70,10 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:layout_width="match_parent"
-        android:layout_height="672dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
