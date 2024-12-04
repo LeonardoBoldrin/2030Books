@@ -172,7 +172,7 @@ public class AddBookActivity extends AppCompatActivity {
     }
 
         // _________________________________________________________________________________________
-
+// ciao
     private void addBookToDb() {
 
         HashMap<String, Object> bookDetails = new HashMap<>();

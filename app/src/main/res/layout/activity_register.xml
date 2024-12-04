@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
+        app:layout_constraintTop_toBottomOf="@+id/etNickname"
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/etAge"
         app:layout_constraintVertical_bias="0.04" />
 
     <TextView
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+        app:layout_constraintTop_toBottomOf="@+id/etPlace"
         app:layout_constraintVertical_bias="0.051" />
 
     <TextView
@@ -109,7 +109,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone"
         app:layout_constraintVertical_bias="0.042" />
 
     <Button
@@ -130,7 +130,7 @@
         app:layout_constraintVertical_bias="0.936" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/etNickname"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -142,7 +142,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nick_insert" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/etEmail"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -153,7 +153,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mail_insert" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/etAge"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -164,7 +164,7 @@
         app:layout_constraintTop_toBottomOf="@+id/age_insert" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/etPlace"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/location_insert" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/etPhone"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -186,7 +186,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phone_insert" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/etPassword"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"

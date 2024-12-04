@@ -16,9 +16,6 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ReadDataActivity"
-            android:exported="false" />
-        <activity
             android:name=".AddBookActivity"
             android:exported="false" />
         <activity
