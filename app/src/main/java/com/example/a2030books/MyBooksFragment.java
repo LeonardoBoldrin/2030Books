@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.activity.OnBackPressedCallback;
 
 import com.example.a2030books.databinding.FragmentMyBooksBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +51,7 @@ public class MyBooksFragment extends Fragment {
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
 
         usersRef = db.getReference("Users");
+
     }
 
     @Override
@@ -82,17 +84,16 @@ public class MyBooksFragment extends Fragment {
                         bookList.clear();
 
                         for (DataSnapshot bookSnapshot : dataSnapshot.getChildren()) {
-                            String title = bookSnapshot.getKey();
-                            String author = bookSnapshot.child("Author").getValue(String.class);
-                            String genre = bookSnapshot.child("Genre").getValue(String.class);
-                            String availability = bookSnapshot.child("Availability").getValue(String.class);
-                            String publisher = bookSnapshot.child("Publisher").getValue(String.class);
-                            float price = bookSnapshot.child("Price").getValue(Float.class);
+                            String bookTitle = bookSnapshot.getKey();
+                            Book bookInfo = bookSnapshot.getValue(Book.class);
 
-                            // Assuming your book model includes title, author, genre, and availability
-                            bookList.add(new Book(title, author, genre,publisher, availability, price));
+                            if (bookTitle != null && bookInfo != null) {
+                                // Assuming 'Book' has the correct properties mapped to database fields
+                                bookInfo.setTitle(bookTitle);
+                                bookList.add(bookInfo);
                         }
                         adapter.notifyDataSetChanged();  // Update RecyclerView
+                        }
                     }
 
                     @Override
@@ -101,4 +102,5 @@ public class MyBooksFragment extends Fragment {
                     }
                 });
     }
+
 }

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.window.OnBackInvokedDispatcher;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +46,14 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         loadFragment(new DashboardButtonsFragment());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Back is pressed... Finishing the activity
+                finishAffinity();
+            }
+        });
     }
 
     // Reusable method for fragment transactions
@@ -56,4 +67,6 @@ public class DashboardActivity extends AppCompatActivity {
     public void changePositionText(String text){
         binding.tvPosition.setText(text);
     }
+
+
 }
