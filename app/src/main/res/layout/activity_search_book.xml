@@ -21,10 +21,11 @@
     <EditText
         android:id="@+id/searchView"
         android:layout_width="300dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="450dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/searchview_border"
+        android:hint="Inserisci il nome esatto del libro..."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,8 +43,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/btnSearch"
             android:layout_width="80dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:backgroundTint="@color/green"
             />
 
@@ -65,7 +67,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchView">
 
-        <TableRow>
+        <TableRow
+            android:id="@+id/mainRow">
 
             <TextView
                 android:layout_width="wrap_content"

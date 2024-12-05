@@ -32,9 +32,10 @@ public class SearchBookActivity extends AppCompatActivity {
         binding = ActivitySearchBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.flBtnSearch.setOnClickListener(new View.OnClickListener() {
+        binding.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                deleteDynamicRows();
                 findBooks(binding.searchView.getText().toString());
             }
         });
@@ -79,6 +80,8 @@ public class SearchBookActivity extends AppCompatActivity {
             TableRow row = (TableRow) LayoutInflater.from(SearchBookActivity.this)
                     .inflate(R.layout.table_row, tableLayout, false);
 
+            row.setTag("DYNAMIC_ROW");
+
             TextView tvTitle = row.findViewById(R.id.tvTitle);
             TextView tvGenre = row.findViewById(R.id.tvGenre);
             TextView tvPublisher= row.findViewById(R.id.tvPublisher);
@@ -91,7 +94,28 @@ public class SearchBookActivity extends AppCompatActivity {
             tvAuthor.setText(book.getAuthor());
             tvAvailability.setText(book.getAvailability());
 
+            tvAvailability.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // start the "TakeBookActivity" and pass the info about this book
+                }
+            });
+
             tableLayout.addView(row);
+        }
+    }
+
+    private void deleteDynamicRows() {
+
+        TableLayout tableLayout = binding.TableLayout;
+
+        for (int i = tableLayout.getChildCount() - 1; i >= 0; i--) {
+            View child = tableLayout.getChildAt(i);
+
+            // Check if the row has the tag "DYNAMIC_ROW" and remove it if true
+            if (child.getTag() != null && child.getTag().equals("DYNAMIC_ROW")) {
+                tableLayout.removeViewAt(i);
+            }
         }
     }
 }
