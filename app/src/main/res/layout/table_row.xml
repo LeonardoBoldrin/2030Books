@@ -1,65 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <!-- Column 1 -->
     <HorizontalScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/tvTitolo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        />
+        <TextView
+            android:id="@+id/tvTitolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true" />
     </HorizontalScrollView>
 
+    <!-- Column 2 -->
     <HorizontalScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="none">
-    <TextView
-        android:id="@+id/tvGenere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tvGenere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true" />
     </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/tvEditore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp" />
-
+    <!-- Column 3 -->
     <HorizontalScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/tvUtente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp" />
-
+        <TextView
+            android:id="@+id/tvEditore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true" />
     </HorizontalScrollView>
 
+    <!-- Column 4 -->
     <HorizontalScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:scrollbars="none">
 
-    <TextView
-        android:id="@+id/tvDisponibilePer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp" />
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true" />
+    </HorizontalScrollView>
 
+    <!-- Column 5 -->
+    <HorizontalScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/tvDisponibilePer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true" />
     </HorizontalScrollView>
 </TableRow>

@@ -1,34 +1,38 @@
 package com.example.a2030books;
 
 public class Book {
-    private String title;
-    private String author;
-    private String genre;
-    private String publisher;
-    private String availability;
-    private float price;
+    private String Title;
+    private String Author;
+    private String Genre;
+    private String Publisher;
+    private String Availability;
+    private float Price;
 
     // Empty constructor for Firebase
     public Book() {}
 
     public Book(String title, String author, String genre, String publisher, String availability, float price) {
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.publisher = publisher;
-        this.availability = availability;
-        this.price = price;
+        this.Title = title;
+        this.Author = author;
+        this.Genre = genre;
+        this.Publisher = publisher;
+        this.Availability = availability;
+        this.Price = price;
     }
 
-    public String getTitle() { return title; }
+    public String getTitle() { return Title; }
 
-    public String getAuthor() { return author; }
+    public void setTitle(String title ) { this.Title = title; }
 
-    public String getGenre() { return genre; }
+    public String getAuthor() { return Author; }
 
-    public String getPublisher() { return publisher; }
+    public void setAuthor(String author) { this.Author = author; }
 
-    public String getAvailability() { return availability; }
+    public String getGenre() { return Genre; }
 
-    public float getPrice() { return price; }
+    public String getPublisher() { return Publisher; }
+
+    public String getAvailability() { return Availability; }
+
+    public float getPrice() { return Price; }
 }

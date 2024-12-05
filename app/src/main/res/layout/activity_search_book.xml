@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Titolo"
+                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -52,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Genere"
+                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
@@ -59,19 +61,22 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Editore"
+                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Utente"
+                android:text="Autore"
+                android:gravity="center"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:gravity="center"
                 android:text="Disponibile per"
                 android:textStyle="bold" />
         </TableRow>
