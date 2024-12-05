@@ -12,7 +12,7 @@
         android:scrollbars="none">
 
         <TextView
-            android:id="@+id/tvTitolo"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -29,7 +29,7 @@
         android:scrollbars="none">
 
         <TextView
-            android:id="@+id/tvGenere"
+            android:id="@+id/tvGenre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -46,7 +46,7 @@
         android:scrollbars="none">
 
         <TextView
-            android:id="@+id/tvEditore"
+            android:id="@+id/tvPublisher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -80,7 +80,7 @@
         android:scrollbars="none">
 
         <TextView
-            android:id="@+id/tvDisponibilePer"
+            android:id="@+id/tvAvailability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"

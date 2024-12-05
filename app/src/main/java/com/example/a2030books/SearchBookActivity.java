@@ -3,6 +3,7 @@ package com.example.a2030books;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -31,7 +32,12 @@ public class SearchBookActivity extends AppCompatActivity {
         binding = ActivitySearchBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        findBooks("ciao");
+        binding.flBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                findBooks(binding.searchView.getText().toString());
+            }
+        });
     }
 
     private void findBooks(String title){
@@ -60,7 +66,7 @@ public class SearchBookActivity extends AppCompatActivity {
                 populateTable(bookList);
             } else {
                 // Handle error
-                System.out.println("Error: " + task.getException());
+                Log.d("Error: ", task.getException().getMessage());
             }
         });
     }
@@ -69,20 +75,21 @@ public class SearchBookActivity extends AppCompatActivity {
         TableLayout tableLayout = binding.TableLayout;
 
         for (Book book : books) {
+
             TableRow row = (TableRow) LayoutInflater.from(SearchBookActivity.this)
                     .inflate(R.layout.table_row, tableLayout, false);
 
-            TextView tvTitolo = row.findViewById(R.id.tvTitolo);
-            TextView tvGenere = row.findViewById(R.id.tvGenere);
-            TextView tvEditore = row.findViewById(R.id.tvEditore);
+            TextView tvTitle = row.findViewById(R.id.tvTitle);
+            TextView tvGenre = row.findViewById(R.id.tvGenre);
+            TextView tvPublisher= row.findViewById(R.id.tvPublisher);
             TextView tvAuthor = row.findViewById(R.id.tvAuthor);
-            TextView tvDisponibilePer = row.findViewById(R.id.tvDisponibilePer);
+            TextView tvAvailability = row.findViewById(R.id.tvAvailability);
 
-            tvTitolo.setText(book.getTitle());
-            tvGenere.setText(book.getGenre());
-            tvEditore.setText(book.getPublisher());
+            tvTitle.setText(book.getTitle());
+            tvGenre.setText(book.getGenre());
+            tvPublisher.setText(book.getPublisher());
             tvAuthor.setText(book.getAuthor());
-            tvDisponibilePer.setText(book.getAvailability());
+            tvAvailability.setText(book.getAvailability());
 
             tableLayout.addView(row);
         }
