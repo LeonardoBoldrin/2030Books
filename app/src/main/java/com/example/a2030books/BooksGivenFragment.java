@@ -63,6 +63,8 @@ public class BooksGivenFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((DashboardActivity) requireActivity()).loadFragment(new MyBooksFragment());
+                ((DashboardActivity) requireActivity()).changePositionText("I miei libri");
+
             }
         });
 

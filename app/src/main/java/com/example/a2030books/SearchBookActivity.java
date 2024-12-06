@@ -1,5 +1,6 @@
 package com.example.a2030books;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,26 +12,34 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class SearchBookActivity extends AppCompatActivity {
 
     private ActivitySearchBookBinding binding;
     private List<Book> bookList;
+    private FirebaseAuth auth;
+    private FirebaseDatabase db;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
+        usersRef = db.getReference("Users");
+
         binding = ActivitySearchBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        auth = FirebaseAuth.getInstance();
 
         binding.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,20 +52,20 @@ public class SearchBookActivity extends AppCompatActivity {
 
     private void findBooks(String title){
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
-        DatabaseReference usersRef = db.getReference("Users");
-
         bookList = new ArrayList<>();
 
         usersRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 bookList.clear(); // Clear the list before adding new results
-                for (DataSnapshot userSnapshot : Objects.requireNonNull(task.getResult()).getChildren()) {
+                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
+
+                    String user = userSnapshot.getKey();
+
                     for (DataSnapshot bookSnapshot : userSnapshot.child("Books").getChildren()) {
                         String bookTitle = bookSnapshot.getKey();
                         Book bookInfo = bookSnapshot.getValue(Book.class);
 
-                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title)) {
+                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title) && user.equals(auth.getCurrentUser().toString())) {
                             // Assuming 'Book' has the correct properties mapped to database fields
                             bookInfo.setTitle(bookTitle);
                             bookList.add(bookInfo);
@@ -72,8 +81,10 @@ public class SearchBookActivity extends AppCompatActivity {
         });
     }
 
-    private void populateTable(List<Book> books) {
+    private void populateTable(List<Book> books, List<String> usersIds) {
         TableLayout tableLayout = binding.TableLayout;
+
+        int i = 0;
 
         for (Book book : books) {
 
@@ -94,14 +105,22 @@ public class SearchBookActivity extends AppCompatActivity {
             tvAuthor.setText(book.getAuthor());
             tvAvailability.setText(book.getAvailability());
 
+            int i_copy = i;
+
             tvAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // start the "TakeBookActivity" and pass the info about this book
+                    Intent intent = new Intent(SearchBookActivity.this, TakeBookActivity.class);
+                    intent.putExtra("BOOK_TITLE", book.getTitle());
+                    intent.putExtra("BOOK_PRICE", book.getPrice());
+                    startActivity(intent);
                 }
             });
 
             tableLayout.addView(row);
+
+            i += 1;
         }
     }
 

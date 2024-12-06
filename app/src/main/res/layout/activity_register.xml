@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNickname"
+        app:layout_constraintTop_toBottomOf="@+id/tvStart"
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
@@ -131,7 +131,7 @@
         app:layout_constraintVertical_bias="0.936" />
 
     <EditText
-        android:id="@+id/etNickname"
+        android:id="@+id/tvStart"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -143,7 +143,7 @@
         app:layout_constraintTop_toBottomOf="@+id/nick_insert" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/tvTitle"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
