@@ -29,6 +29,8 @@ public class BooksTakenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((DashboardActivity) requireActivity()).changePositionText("Home");
+        requireActivity().getSupportFragmentManager().popBackStack();
     }
 
     @Override

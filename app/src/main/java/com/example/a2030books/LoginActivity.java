@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String contentEmail, String contentPassword) {
         if (TextUtils.isEmpty(contentEmail) || TextUtils.isEmpty(contentPassword)) {
-            Toast.makeText(LoginActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "Compila tutti i campi", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign-in success
-                        Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Benvenut*!", Toast.LENGTH_SHORT).show();
                         // Redirect to the dashboard
                         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                         startActivity(intent);
@@ -71,13 +71,13 @@ public class LoginActivity extends AppCompatActivity {
                         // Sign-in failed; handle specific cases
                         if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                             // User account with the email does not exist
-                            Toast.makeText(LoginActivity.this, "This email is not registered. Please sign up or use a different email.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Email non esistente", Toast.LENGTH_LONG).show();
                         } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             // Password is incorrect
-                            Toast.makeText(LoginActivity.this, "Invalid password. Please try again.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Password non corretta. Riprova", Toast.LENGTH_LONG).show();
                         } else {
                             // Other errors
-                            Toast.makeText(LoginActivity.this, "Authentication failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Autenticazione fallita: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

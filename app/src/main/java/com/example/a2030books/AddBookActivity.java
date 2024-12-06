@@ -192,8 +192,9 @@ public class AddBookActivity extends AppCompatActivity {
                 .child(selectedTitle).setValue(bookDetails)
                     .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                Toast.makeText(AddBookActivity.this, "Book added successfully!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddBookActivity.this, "Libro aggiunto correttamente", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AddBookActivity.this, DashboardActivity.class);
+                                intent.putExtra("FRAGMENT_TO_LOAD", "MyBooksFragment");
                                 startActivity(intent);
                             } else
                                 Toast.makeText(AddBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();

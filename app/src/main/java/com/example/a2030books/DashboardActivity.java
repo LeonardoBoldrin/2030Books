@@ -45,15 +45,14 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        loadFragment(new DashboardButtonsFragment());
+        String fragmentToLoad = getIntent().getStringExtra("FRAGMENT_TO_LOAD");
 
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                // Back is pressed... Finishing the activity
-                finishAffinity();
-            }
-        });
+        if (fragmentToLoad != null) {
+            if (fragmentToLoad.equals("MyBooksFragment"))
+                loadFragment(new MyBooksFragment());
+        }
+        else
+            loadFragment(new DashboardButtonsFragment());
     }
 
     // Reusable method for fragment transactions

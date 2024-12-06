@@ -52,6 +52,14 @@ public class MyBooksFragment extends Fragment {
 
         usersRef = db.getReference("Users");
 
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                ((DashboardActivity) requireActivity()).changePositionText("Prestiti");
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
     }
 
     @Override
