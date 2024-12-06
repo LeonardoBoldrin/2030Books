@@ -29,6 +29,12 @@ public class LoginActivity extends AppCompatActivity {
         
         auth = FirebaseAuth.getInstance();
 
+        // Check if the user has as session in Firebase
+        if (auth.getCurrentUser() != null) {
+            // User is signed in, navigate to the main app screen
+            startActivity(new Intent(this, DashboardActivity.class));
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
