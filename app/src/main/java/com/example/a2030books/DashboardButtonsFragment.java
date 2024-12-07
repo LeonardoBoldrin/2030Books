@@ -46,7 +46,7 @@ public class DashboardButtonsFragment extends Fragment {
                     return;
                 }
 
-                Toast.makeText(getActivity(), "Press again to exit!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Premi ancora per chiudere l'app", Toast.LENGTH_SHORT).show();
                 isBackPressed = true;
 
                 binding.getRoot().postDelayed(() -> isBackPressed = false, 2000);

@@ -1,7 +1,8 @@
 package com.example.a2030books;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,5 +19,12 @@ public class TakeBookActivity extends AppCompatActivity {
 
         binding = ActivityTakeBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent intent = getIntent();
+
+        // intent.getStringExtra("USER_ID");
+
+        binding.tvTitleTakeBook.setText(intent.getStringExtra("BOOK_TITLE"));
+        binding.tvStringPriceTakebook.setText(String.valueOf(intent.getFloatExtra("BOOK_PRICE", 0.0f)) + "€");
     }
 }

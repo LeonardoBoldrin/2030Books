@@ -118,10 +118,10 @@
         android:id="@+id/tvTime"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="315dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPrice_takebook"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -129,12 +129,12 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="35dp"
         android:text="Ora"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="316dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvPrice_takebook"
         app:layout_constraintEnd_toStartOf="@+id/tvTime"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -152,8 +152,32 @@
         app:layout_constraintEnd_toStartOf="@+id/tvPlace"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/tvPrice_takebook"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="200dp"
+        android:text="Prezzo"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvStringPrice_takebook"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvStringPrice_takebook"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="200dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
-        android:id="@+id/newAcc_btn"
+        android:id="@+id/btnTakeBook"
         android:layout_width="200dp"
         android:layout_height="81dp"
         android:backgroundTint="@color/green"
@@ -165,7 +189,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringPrice_takebook" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
