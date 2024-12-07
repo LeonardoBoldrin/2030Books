@@ -65,15 +65,15 @@ public class RegisterActivity extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(data[1], data[2])
                 .addOnCompleteListener(RegisterActivity.this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Registrazione effettuata", Toast.LENGTH_SHORT).show();
                         // creates the "Info" node in the db
                         // createInfoNode(data)
                     } else if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         // Email is already in use
-                        Toast.makeText(RegisterActivity.this, "This email is already registered. Please sign in.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Email già esistente", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Registrazione fallita: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

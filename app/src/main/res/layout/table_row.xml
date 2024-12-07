@@ -14,7 +14,7 @@
         android:scrollbars="none">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvTitle_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"

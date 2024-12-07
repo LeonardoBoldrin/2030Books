@@ -28,10 +28,13 @@ public class SearchBookActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseDatabase db;
     private DatabaseReference usersRef;
+    private List<String> usersIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        usersIds = new ArrayList<>();
 
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         usersRef = db.getReference("Users");
@@ -60,12 +63,13 @@ public class SearchBookActivity extends AppCompatActivity {
                 for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
 
                     String user = userSnapshot.getKey();
+                    usersIds.add(user);
 
                     for (DataSnapshot bookSnapshot : userSnapshot.child("Books").getChildren()) {
                         String bookTitle = bookSnapshot.getKey();
                         Book bookInfo = bookSnapshot.getValue(Book.class);
 
-                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title) && user.equals(auth.getCurrentUser().toString())) {
+                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title)) {
                             // Assuming 'Book' has the correct properties mapped to database fields
                             bookInfo.setTitle(bookTitle);
                             bookList.add(bookInfo);
@@ -73,7 +77,7 @@ public class SearchBookActivity extends AppCompatActivity {
                     }
                 }
                 // Populate table with filtered books
-                populateTable(bookList);
+                populateTable();
             } else {
                 // Handle error
                 Log.d("Error: ", task.getException().getMessage());
@@ -81,19 +85,19 @@ public class SearchBookActivity extends AppCompatActivity {
         });
     }
 
-    private void populateTable(List<Book> books, List<String> usersIds) {
+    private void populateTable() {
         TableLayout tableLayout = binding.TableLayout;
 
         int i = 0;
 
-        for (Book book : books) {
+        for (Book book : bookList) {
 
             TableRow row = (TableRow) LayoutInflater.from(SearchBookActivity.this)
                     .inflate(R.layout.table_row, tableLayout, false);
 
             row.setTag("DYNAMIC_ROW");
 
-            TextView tvTitle = row.findViewById(R.id.tvTitle);
+            TextView tvTitle = row.findViewById(R.id.tvTitle_search);
             TextView tvGenre = row.findViewById(R.id.tvGenre);
             TextView tvPublisher= row.findViewById(R.id.tvPublisher);
             TextView tvAuthor = row.findViewById(R.id.tvAuthor);
@@ -114,6 +118,7 @@ public class SearchBookActivity extends AppCompatActivity {
                     Intent intent = new Intent(SearchBookActivity.this, TakeBookActivity.class);
                     intent.putExtra("BOOK_TITLE", book.getTitle());
                     intent.putExtra("BOOK_PRICE", book.getPrice());
+                    intent.putExtra("USER_ID", usersIds.get(i_copy));
                     startActivity(intent);
                 }
             });
