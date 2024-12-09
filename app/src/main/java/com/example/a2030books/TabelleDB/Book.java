@@ -22,11 +22,9 @@ public class Book {
 
     public String getTitle() { return Title; }
 
-    public void setTitle(String title ) { this.Title = title; }
+    public void setTitle(String title) { this.Title = title; }
 
     public String getAuthor() { return Author; }
-
-    public void setAuthor(String author) { this.Author = author; }
 
     public String getGenre() { return Genre; }
 

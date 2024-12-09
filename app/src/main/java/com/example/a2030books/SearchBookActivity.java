@@ -1,6 +1,7 @@
 package com.example.a2030books;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +10,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.a2030books.TabelleDB.Book;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
@@ -53,6 +58,43 @@ public class SearchBookActivity extends AppCompatActivity {
                 findBooks(binding.searchView.getText().toString());
             }
         });
+    }
+
+    private void checkAndRequestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(SearchBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Request permission
+            ActivityCompat.requestPermissions(SearchBookActivity.this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        } else {
+            // Permission is already granted
+            getUserLocation();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                getUserLocation();
+            } else {
+                // Permission denied
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchBookActivity.this);
+                builder.setMessage("Permessi di posizione necessari per utilizzare l'applicazione")
+                        .setTitle("Errore");
+
+                builder.setNeutralButton("Ok", (dialogInterface, i) -> {
+                    dialogInterface.dismiss(); // Makes the dialog disappear
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
     }
 
     private void findBooks(String title){
