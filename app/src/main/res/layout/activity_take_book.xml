@@ -7,20 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/reg_title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:text="Altre Impostazioni"
-        android:textColor="@color/green"
-        android:textSize="44sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
@@ -31,6 +17,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reg_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:text="Prenotazione"
+        android:textColor="@color/green"
+        android:textSize="44sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/tvStringTitle"

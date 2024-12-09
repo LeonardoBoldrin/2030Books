@@ -1,17 +1,16 @@
 package com.example.a2030books;
-import android.app.Activity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.window.OnBackInvokedDispatcher;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.a2030books.Fragment.DashboardButtonsFragment;
+import com.example.a2030books.Fragment.MyBooksFragment;
+import com.example.a2030books.Fragment.UserProfileFragment;
 import com.example.a2030books.databinding.ActivityDashboardBinding;
 
 public class DashboardActivity extends AppCompatActivity {

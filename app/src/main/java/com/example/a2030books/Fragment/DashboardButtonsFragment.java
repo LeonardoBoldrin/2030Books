@@ -1,4 +1,4 @@
-package com.example.a2030books;
+package com.example.a2030books.Fragment;
 
 import static androidx.core.app.ActivityCompat.finishAffinity;
 
@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.a2030books.AddBookActivity;
+import com.example.a2030books.DashboardActivity;
+import com.example.a2030books.SearchBookActivity;
 import com.example.a2030books.databinding.FragmentDashboardButtonsBinding;
 
 public class DashboardButtonsFragment extends Fragment {

@@ -1,4 +1,4 @@
-package com.example.a2030books;
+package com.example.a2030books.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.a2030books.DashboardActivity;
 import com.example.a2030books.databinding.FragmentBooksTakenBinding;
 import com.example.a2030books.databinding.FragmentDashboardButtonsBinding;
 

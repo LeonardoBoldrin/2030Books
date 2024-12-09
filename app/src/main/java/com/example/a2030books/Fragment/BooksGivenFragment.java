@@ -1,4 +1,4 @@
-package com.example.a2030books;
+package com.example.a2030books.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.a2030books.DashboardActivity;
+import com.example.a2030books.Fragment.MyBooksFragment;
 import com.example.a2030books.databinding.FragmentBooksGivenBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

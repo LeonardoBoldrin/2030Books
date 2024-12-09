@@ -10,6 +10,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.a2030books.TabelleDB.Book;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
 
 import com.google.firebase.auth.FirebaseAuth;

@@ -111,4 +111,23 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnDeleteBook_mybooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elimina libro"
+            android:textSize="20sp"
+            android:backgroundTint="@color/red"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

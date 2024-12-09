@@ -1,4 +1,4 @@
-package com.example.a2030books;
+package com.example.a2030books.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.a2030books.DashboardActivity;
 import com.example.a2030books.databinding.FragmentUserProfileBinding;
 
 public class UserProfileFragment extends Fragment {
@@ -43,6 +44,13 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentUserProfileBinding.inflate(inflater, container, false);
+
+        binding.btnMoreUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((DashboardActivity) requireActivity()).loadFragment(new UserSettingsFragment());
+            }
+        });
 
         //__________________________________________________________________________________________
 
