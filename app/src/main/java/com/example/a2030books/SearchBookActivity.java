@@ -2,6 +2,8 @@ package com.example.a2030books;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,9 +20,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.a2030books.TabelleDB.Book;
+import com.example.a2030books.TabelleDB.User;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,33 +38,34 @@ public class SearchBookActivity extends AppCompatActivity {
 
     private ActivitySearchBookBinding binding;
     private List<Book> bookList;
-    private FirebaseAuth auth;
     private FirebaseDatabase db;
     private DatabaseReference usersRef;
     private List<String> usersIds;
 
+    private FusedLocationProviderClient fusedLocationClient;
+    private static final float RADIUS_METERS = 5.0f * 1000; // range km in meters
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding = ActivitySearchBookBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         usersIds = new ArrayList<>();
 
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         usersRef = db.getReference("Users");
 
-        binding = ActivitySearchBookBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        auth = FirebaseAuth.getInstance();
-
         binding.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteDynamicRows();
-                findBooks(binding.searchView.getText().toString());
+                checkAndRequestLocationPermission();
             }
         });
     }
+
+    // FUNZIONI PER LA POSIZIONE
 
     private void checkAndRequestLocationPermission() {
         if (ContextCompat.checkSelfPermission(SearchBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -71,6 +78,7 @@ public class SearchBookActivity extends AppCompatActivity {
         } else {
             // Permission is already granted
             getUserLocation();
+            deleteDynamicRows();
         }
     }
 
@@ -81,13 +89,15 @@ public class SearchBookActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
                 getUserLocation();
+                deleteDynamicRows();
+                findBooks(binding.searchView.getText().toString());
             } else {
                 // Permission denied
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchBookActivity.this);
                 builder.setMessage("Permessi di posizione necessari per utilizzare l'applicazione")
                         .setTitle("Errore");
 
-                builder.setNeutralButton("Ok", (dialogInterface, i) -> {
+                builder.setPositiveButton("Ok", (dialogInterface, i) -> {
                     dialogInterface.dismiss(); // Makes the dialog disappear
                 });
 
@@ -96,6 +106,40 @@ public class SearchBookActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void getUserLocation() {
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(SearchBookActivity.this);
+
+        if (ContextCompat.checkSelfPermission(SearchBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(location -> {
+                                if (location != null) {
+                                    double latitude = location.getLatitude();
+                                    double longitude = location.getLongitude();
+
+                                    onLocationDefined(latitude, longitude);
+                                } else {
+                                    // TODO HERE
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(SearchBookActivity.this, "Impossibile effettuare il download della posizione: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            });
+        }
+        else{
+            Toast.makeText(SearchBookActivity.this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void onLocationDefined(double latitude, double longitude){
+        findBooks(binding.searchView.getText().toString());
+        findUsersInRange(latitude, longitude);
+        populateTable();
+    }
+
+    // FUNZIONI PER CERCARE I LIBRI NEL DB
 
     private void findBooks(String title){
 
@@ -120,16 +164,45 @@ public class SearchBookActivity extends AppCompatActivity {
                         }
                     }
                 }
-                // Populate table with filtered books
-                populateTable();
+
             } else {
-                // Handle error
                 Log.d("Error: ", task.getException().getMessage());
             }
         });
     }
 
+    public void findUsersInRange(double userLat, double userLon) {
+        List<Book> booksInRange = new ArrayList<>();
+
+        int i = 0;
+
+        for (Book book : bookList) {
+            float[] results = new float[1];
+
+            User owner = new User();
+            usersRef.child(usersIds.get(i))
+                    .child("Info").get().addOnCompleteListener(task -> {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    owner.setLatitude(task.getResult().child("Latitude").getValue(Double.class));
+                                    owner.setLongitude(task.getResult().child("Longitude").getValue(Double.class));
+                                }
+                    });
+
+            Location.distanceBetween(userLat, userLon, owner.getLatitude(), owner.getLongitude(), results);
+            float distance = results[0]; // Distance in meters
+
+            // Add the book if distance is less then 5Km
+            if (distance <= RADIUS_METERS) {
+                booksInRange.add(book);
+            }
+        }
+
+        bookList = booksInRange;
+    }
+    // FUNZIONI PER IL FRONTEND
+
     private void populateTable() {
+
         TableLayout tableLayout = binding.TableLayout;
 
         int i = 0;
