@@ -3,8 +3,8 @@ package com.example.a2030books;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +24,11 @@ import com.example.a2030books.TabelleDB.User;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +46,7 @@ public class SearchBookActivity extends AppCompatActivity {
     private List<String> usersIds;
 
     private FusedLocationProviderClient fusedLocationClient;
+    private Location currentLocation;
     private static final float RADIUS_METERS = 5.0f * 1000; // range km in meters
 
     @Override
@@ -53,6 +57,8 @@ public class SearchBookActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         usersIds = new ArrayList<>();
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         usersRef = db.getReference("Users");
@@ -78,7 +84,6 @@ public class SearchBookActivity extends AppCompatActivity {
         } else {
             // Permission is already granted
             getUserLocation();
-            deleteDynamicRows();
         }
     }
 
@@ -109,33 +114,33 @@ public class SearchBookActivity extends AppCompatActivity {
 
     private void getUserLocation() {
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(SearchBookActivity.this);
-
         if (ContextCompat.checkSelfPermission(SearchBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-                    fusedLocationClient.getLastLocation()
-                            .addOnSuccessListener(location -> {
-                                if (location != null) {
-                                    double latitude = location.getLatitude();
-                                    double longitude = location.getLongitude();
+            LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
+                    .setMinUpdateIntervalMillis(5000)
+                    .build();
 
-                                    onLocationDefined(latitude, longitude);
-                                } else {
-                                    // TODO HERE
-                                }
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(SearchBookActivity.this, "Impossibile effettuare il download della posizione: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            });
-        }
-        else{
-            Toast.makeText(SearchBookActivity.this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
+            LocationCallback locationCallback = new LocationCallback() {
+                @Override
+                public void onLocationResult(@NonNull LocationResult locationResult) {
+                    Location location = locationResult.getLastLocation();
+                    if (location != null) {
+                        currentLocation = location;
+                        onLocationDefined();
+                        fusedLocationClient.removeLocationUpdates(this);
+                    }
+                }
+            };
+
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+        } else {
+            Toast.makeText(this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void onLocationDefined(double latitude, double longitude){
+    private void onLocationDefined(){
         findBooks(binding.searchView.getText().toString());
-        findUsersInRange(latitude, longitude);
+        findUsersInRange();
         populateTable();
     }
 
@@ -171,7 +176,7 @@ public class SearchBookActivity extends AppCompatActivity {
         });
     }
 
-    public void findUsersInRange(double userLat, double userLon) {
+    public void findUsersInRange() {
         List<Book> booksInRange = new ArrayList<>();
 
         int i = 0;
@@ -182,18 +187,21 @@ public class SearchBookActivity extends AppCompatActivity {
             User owner = new User();
             usersRef.child(usersIds.get(i))
                     .child("Info").get().addOnCompleteListener(task -> {
-                                if (task.isSuccessful() && task.getResult() != null) {
-                                    owner.setLatitude(task.getResult().child("Latitude").getValue(Double.class));
-                                    owner.setLongitude(task.getResult().child("Longitude").getValue(Double.class));
-                                }
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            owner.setLatitude(task.getResult().child("Latitude").getValue(Double.class));
+                            owner.setLongitude(task.getResult().child("Longitude").getValue(Double.class));
+                        }
                     });
 
-            Location.distanceBetween(userLat, userLon, owner.getLatitude(), owner.getLongitude(), results);
-            float distance = results[0]; // Distance in meters
+            if (currentLocation != null){
 
-            // Add the book if distance is less then 5Km
-            if (distance <= RADIUS_METERS) {
-                booksInRange.add(book);
+                Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), owner.getLatitude(), owner.getLongitude(), results);
+                float distance = results[0]; // Distance in meters
+
+                // Add the book if distance is less then 5Km
+                if (distance <= RADIUS_METERS) {
+                    booksInRange.add(book);
+                }
             }
         }
 
@@ -203,9 +211,14 @@ public class SearchBookActivity extends AppCompatActivity {
 
     private void populateTable() {
 
+        deleteDynamicRows();
+
         TableLayout tableLayout = binding.TableLayout;
 
         int i = 0;
+
+        if(bookList.isEmpty())
+            Toast.makeText(SearchBookActivity.this, "Nessun libro trovato nelle vicinanze", Toast.LENGTH_SHORT).show();
 
         for (Book book : bookList) {
 
