@@ -46,7 +46,7 @@ public class SearchBookActivity extends AppCompatActivity {
     private List<String> usersIds;
 
     private FusedLocationProviderClient fusedLocationClient;
-    private Location currentLocation;
+    private Location currentLocation; // Location memorized
     private static final float RADIUS_METERS = 5.0f * 1000; // range km in meters
 
     @Override
@@ -94,8 +94,6 @@ public class SearchBookActivity extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
                 getUserLocation();
-                deleteDynamicRows();
-                findBooks(binding.searchView.getText().toString());
             } else {
                 // Permission denied
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchBookActivity.this);
@@ -113,30 +111,40 @@ public class SearchBookActivity extends AppCompatActivity {
     }
 
     private void getUserLocation() {
-
         if (ContextCompat.checkSelfPermission(SearchBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
-                    .setMinUpdateIntervalMillis(5000)
-                    .build();
 
-            LocationCallback locationCallback = new LocationCallback() {
-                @Override
-                public void onLocationResult(@NonNull LocationResult locationResult) {
-                    Location location = locationResult.getLastLocation();
-                    if (location != null) {
-                        currentLocation = location;
-                        onLocationDefined();
-                        fusedLocationClient.removeLocationUpdates(this);
-                    }
-                }
-            };
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(location -> {
+                        if (location != null) {
+                            currentLocation = location;
+                            onLocationDefined();
+                        } else {
+                            LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
+                                    .setMinUpdateIntervalMillis(5000)
+                                    .build();
 
-            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+                            LocationCallback locationCallback = new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    Location location = locationResult.getLastLocation();
+                                    if (location != null) {
+                                        currentLocation = location;
+                                        onLocationDefined();
+                                        fusedLocationClient.removeLocationUpdates(this);
+                                    }
+                                }
+                            };
+
+                            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+                        }
+                    });
+
         } else {
             Toast.makeText(this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void onLocationDefined(){
         findBooks(binding.searchView.getText().toString());
@@ -192,9 +200,8 @@ public class SearchBookActivity extends AppCompatActivity {
                             owner.setLongitude(task.getResult().child("Longitude").getValue(Double.class));
                         }
                     });
-
+            Log.d("distance", "SONO QUAA");
             if (currentLocation != null){
-
                 Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), owner.getLatitude(), owner.getLongitude(), results);
                 float distance = results[0]; // Distance in meters
 
