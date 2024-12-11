@@ -38,6 +38,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/tvPlace"
@@ -60,6 +61,7 @@
         android:id="@+id/etActualPassword_US"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:inputType="text"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/etNewPassword_US"
@@ -70,6 +72,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="250dp"
+        android:layout_marginEnd="10dp"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -88,19 +91,37 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/newAcc_btn"
+        android:id="@+id/btnChangePwd_US"
         android:layout_width="160dp"
-        android:layout_height="95dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/green"
         android:padding="18dp"
-        android:text="Cambia Impostazioni"
+        android:layout_marginStart="200dp"
+        android:layout_marginEnd="10dp"
+        android:text="Cambia password"
         android:textColor="@color/darkGreen"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/red"
+        android:padding="18dp"
+        android:text="Logout"
+        android:textColor="@color/darkGreen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/newAcc_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

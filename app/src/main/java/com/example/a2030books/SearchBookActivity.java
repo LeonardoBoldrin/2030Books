@@ -20,7 +20,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.a2030books.TabelleDB.Book;
-import com.example.a2030books.TabelleDB.User;
 import com.example.a2030books.databinding.ActivitySearchBookBinding;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -29,12 +28,14 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class SearchBookActivity extends AppCompatActivity {
@@ -118,7 +119,7 @@ public class SearchBookActivity extends AppCompatActivity {
                     .addOnSuccessListener(location -> {
                         if (location != null) {
                             currentLocation = location;
-                            onLocationDefined();
+                            findBooks(binding.searchView.getText().toString());
                         } else {
                             LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
                                     .setMinUpdateIntervalMillis(5000)
@@ -130,7 +131,7 @@ public class SearchBookActivity extends AppCompatActivity {
                                     Location location = locationResult.getLastLocation();
                                     if (location != null) {
                                         currentLocation = location;
-                                        onLocationDefined();
+                                        findBooks(binding.searchView.getText().toString());
                                         fusedLocationClient.removeLocationUpdates(this);
                                     }
                                 }
@@ -146,12 +147,6 @@ public class SearchBookActivity extends AppCompatActivity {
     }
 
 
-    private void onLocationDefined(){
-        findBooks(binding.searchView.getText().toString());
-        findUsersInRange();
-        populateTable();
-    }
-
     // FUNZIONI PER CERCARE I LIBRI NEL DB
 
     private void findBooks(String title){
@@ -164,20 +159,20 @@ public class SearchBookActivity extends AppCompatActivity {
                 for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
 
                     String user = userSnapshot.getKey();
-                    usersIds.add(user);
+                    if(!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user))
+                        usersIds.add(user);
 
                     for (DataSnapshot bookSnapshot : userSnapshot.child("Books").getChildren()) {
                         String bookTitle = bookSnapshot.getKey();
                         Book bookInfo = bookSnapshot.getValue(Book.class);
-
-                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title)) {
+                        if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title) && !FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user)) {
                             // Assuming 'Book' has the correct properties mapped to database fields
                             bookInfo.setTitle(bookTitle);
                             bookList.add(bookInfo);
+                            findUsersInRange();
                         }
                     }
                 }
-
             } else {
                 Log.d("Error: ", task.getException().getMessage());
             }
@@ -187,32 +182,53 @@ public class SearchBookActivity extends AppCompatActivity {
     public void findUsersInRange() {
         List<Book> booksInRange = new ArrayList<>();
 
+        // Use a counter to track async operations
+        AtomicInteger completedOperations = new AtomicInteger(0);
+
         int i = 0;
 
         for (Book book : bookList) {
+
+            String userId = usersIds.get(i);
+
             float[] results = new float[1];
 
-            User owner = new User();
-            usersRef.child(usersIds.get(i))
+            usersRef.child(userId)
                     .child("Info").get().addOnCompleteListener(task -> {
                         if (task.isSuccessful() && task.getResult() != null) {
-                            owner.setLatitude(task.getResult().child("Latitude").getValue(Double.class));
-                            owner.setLongitude(task.getResult().child("Longitude").getValue(Double.class));
+                            DataSnapshot snapshot = task.getResult();
+                            Double latitude = snapshot.child("Latitude").getValue(Double.class);
+                            Double longitude = snapshot.child("Longitude").getValue(Double.class);
+
+                            if (currentLocation != null && latitude != null && longitude != null) {
+                                Location.distanceBetween(
+                                        currentLocation.getLatitude(),
+                                        currentLocation.getLongitude(),
+                                        latitude,
+                                        longitude,
+                                        results
+                                );
+
+                                float distance = results[0]; // Distance in meters
+
+                                // Add the book if distance is less than 5Km
+                                if (distance > RADIUS_METERS) {
+                                    synchronized (booksInRange) {
+                                        booksInRange.add(book);
+                                    }
+                                }
+                            }
+                        }
+
+                        // Check if all operations are complete
+                        if (completedOperations.incrementAndGet() == bookList.size()) {
+                            bookList = booksInRange;
+                            populateTable();
                         }
                     });
-            Log.d("distance", "SONO QUAA");
-            if (currentLocation != null){
-                Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), owner.getLatitude(), owner.getLongitude(), results);
-                float distance = results[0]; // Distance in meters
 
-                // Add the book if distance is less then 5Km
-                if (distance <= RADIUS_METERS) {
-                    booksInRange.add(book);
-                }
-            }
+            i += 1;
         }
-
-        bookList = booksInRange;
     }
     // FUNZIONI PER IL FRONTEND
 

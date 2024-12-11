@@ -31,7 +31,10 @@ public class User {
     }
 
     public void setLatitude(double latitude) {
-        place = new Pair<>(latitude, place.second);
+        if(place != null)
+            place = new Pair<>(latitude, place.second);
+        else
+            place = new Pair<>(latitude, 0.0d);
     }
 
     public double getLongitude(){
@@ -39,7 +42,11 @@ public class User {
     }
 
     public void setLongitude(double longitude){
-        place = new Pair<>(place.first, longitude);
+        if(place != null)
+            place = new Pair<>(place.first, longitude);
+        else
+            place = new Pair<>(0.0d, longitude);
+
     }
 
     public String getDay(){
