@@ -30,14 +30,14 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2"/>
 
         <TextView
-            android:id="@+id/tvNewBook_AB"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nuovo Inserimento"
             android:textColor="@color/darkGreen"
             android:textSize="44dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/etTitle_AB"
+            app:layout_constraintBottom_toTopOf="@+id/etTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
             app:layout_constraintVertical_bias="0.035" />
 
         <EditText
-            android:id="@+id/etTitle_AB"
+            android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -61,7 +61,7 @@
             app:layout_constraintWidth_percent="1.0" />
 
         <EditText
-            android:id="@+id/etAuthor_AB"
+            android:id="@+id/etAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -73,11 +73,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etTitle_AB"
+            app:layout_constraintTop_toBottomOf="@id/etTitle"
             app:layout_constraintWidth_percent="1.0" />
 
         <Spinner
-            android:id="@+id/srPublisher_AB"
+            android:id="@+id/srPublisher"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="88dp"
@@ -87,10 +87,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etTitle_AB" />
+            app:layout_constraintTop_toBottomOf="@id/etTitle" />
 
         <Spinner
-            android:id="@+id/srGenre_AB"
+            android:id="@+id/srGenre"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/border_background"
@@ -99,21 +99,21 @@
             app:layout_constraintBottom_toTopOf="@+id/radioGroupDisponibilePer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/srPublisher_AB" />
+            app:layout_constraintTop_toBottomOf="@id/srPublisher" />
 
         <TextView
-            android:id="@+id/tvStringAvailable_AB"
+            android:id="@+id/textView2"
             android:layout_width="125dp"
             android:layout_height="25dp"
             android:layout_marginTop="52dp"
             android:text="Disponibile per: "
             android:textColor="@color/darkGreen"
             android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/etPriceLoan_AB"
+            app:layout_constraintBottom_toTopOf="@+id/etPrezzoCauzione"
             app:layout_constraintEnd_toStartOf="@+id/radioGroupDisponibilePer"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/srGenre_AB"
+            app:layout_constraintTop_toBottomOf="@id/srGenre"
             app:layout_constraintVertical_bias="0.0" />
 
         <RadioGroup
@@ -128,7 +128,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:id="@+id/rbSell_AB"
+                android:id="@+id/vendita"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -139,7 +139,7 @@
                 android:textSize="15dp" />
 
             <RadioButton
-                android:id="@+id/rbLoan_AB"
+                android:id="@+id/prestito"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -151,7 +151,7 @@
         </RadioGroup>
 
         <EditText
-            android:id="@+id/etPriceLoan_AB"
+            android:id="@+id/etPrezzoCauzione"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -178,6 +178,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPriceLoan_AB" />
+            app:layout_constraintTop_toBottomOf="@+id/etPrezzoCauzione" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
