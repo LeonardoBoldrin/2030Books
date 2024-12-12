@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/reg_title2"
+        android:id="@+id/tvStringReservation_TB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="1dp"
@@ -27,13 +27,13 @@
         android:textColor="@color/green"
         android:textSize="44sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTitle"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringBook_TB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/tvStringTitle"
+        android:id="@+id/tvStringBook_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -42,23 +42,23 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringStart"
-        app:layout_constraintEnd_toStartOf="@+id/tvTitle_takeBook"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringStart_TB"
+        app:layout_constraintEnd_toStartOf="@+id/tvBook_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStart"
+        android:id="@+id/tvStart_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="35dp"
         android:ems="10"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/spEnd"
+        app:layout_constraintBottom_toTopOf="@+id/spEnd_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringStart"
+        android:id="@+id/tvStringStart_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -67,12 +67,12 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringEnd"
-        app:layout_constraintEnd_toStartOf="@+id/tvStart"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringEnd_TB"
+        app:layout_constraintEnd_toStartOf="@+id/tvStart_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringEnd"
+        android:id="@+id/tvStringEnd_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -81,51 +81,51 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace"
-        app:layout_constraintEnd_toStartOf="@+id/spEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace_TB"
+        app:layout_constraintEnd_toStartOf="@+id/spEnd_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spEnd"
+        android:id="@+id/spEnd_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="38dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlace_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvTitle_takeBook"
+        android:id="@+id/tvBook_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="35dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStart"
+        app:layout_constraintBottom_toTopOf="@+id/tvStart_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvPlace"
+        android:id="@+id/tvPlace_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="35dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTime"
+        app:layout_constraintBottom_toTopOf="@+id/tvTime_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvTime"
+        android:id="@+id/tvTime_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
         android:layout_marginEnd="20dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPrice_takebook"
+        app:layout_constraintBottom_toTopOf="@+id/tvPrice_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringTime"
+        android:id="@+id/tvStringTime_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -134,12 +134,12 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvPrice_takebook"
-        app:layout_constraintEnd_toStartOf="@+id/tvTime"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPrice_TB"
+        app:layout_constraintEnd_toStartOf="@+id/tvTime_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPlace"
+        android:id="@+id/tvStringPlace_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -148,12 +148,12 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTime"
-        app:layout_constraintEnd_toStartOf="@+id/tvPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringTime_TB"
+        app:layout_constraintEnd_toStartOf="@+id/tvPlace_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvPrice_takebook"
+        android:id="@+id/tvStringPrice_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -163,11 +163,11 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvStringPrice_takebook"
+        app:layout_constraintEnd_toStartOf="@+id/tvPrice_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPrice_takebook"
+        android:id="@+id/tvPrice_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -177,7 +177,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnTakeBook"
+        android:id="@+id/btnTakeBook_TB"
         android:layout_width="200dp"
         android:layout_height="81dp"
         android:backgroundTint="@color/green"
@@ -189,7 +189,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringPrice_takebook" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice_TB" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

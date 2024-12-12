@@ -9,7 +9,7 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/reg_title"
+        android:id="@+id/tvRegister_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrazione"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.043" />
 
     <TextView
-        android:id="@+id/nick_insert"
+        android:id="@+id/tvStingNickname_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Nickname"
@@ -35,14 +35,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reg_title"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegister_REG"
         app:layout_constraintVertical_bias="0.04" />
 
     <TextView
-        android:id="@+id/mail_insert"
+        android:id="@+id/tvStringEmail_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Email"
+        android:text="Email"
         android:textColor="@color/darkGreen"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -50,11 +50,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNickname"
+        app:layout_constraintTop_toBottomOf="@+id/etNickname_REG"
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/age_insert"
+        android:id="@+id/tvStringAge_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Età"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/location_insert"
+        android:id="@+id/tvStringPlace_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Luogo d'incontro nelle vicinanze"
@@ -80,11 +80,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge"
+        app:layout_constraintTop_toBottomOf="@+id/etAge_REG"
         app:layout_constraintVertical_bias="0.04" />
 
     <TextView
-        android:id="@+id/phone_insert"
+        android:id="@+id/tvStringCellPhone_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Numero di cellulare"
@@ -95,11 +95,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPlace"
+        app:layout_constraintTop_toBottomOf="@+id/etPlace_REG"
         app:layout_constraintVertical_bias="0.051" />
 
     <TextView
-        android:id="@+id/newPw_insert"
+        android:id="@+id/tvStringPassword_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Password"
@@ -110,11 +110,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone"
+        app:layout_constraintTop_toBottomOf="@+id/etPhone_REG"
         app:layout_constraintVertical_bias="0.042" />
 
     <Button
-        android:id="@+id/newAcc_btn"
+        android:id="@+id/btnNewAccount_REG"
         android:layout_width="374dp"
         android:layout_height="70dp"
         android:backgroundTint="@color/green"
@@ -131,7 +131,7 @@
         app:layout_constraintVertical_bias="0.936" />
 
     <EditText
-        android:id="@+id/etNickname"
+        android:id="@+id/etNickname_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nick_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStingNickname_REG" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -151,10 +151,10 @@
         android:inputType="textEmailAddress"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringEmail_REG" />
 
     <EditText
-        android:id="@+id/etAge"
+        android:id="@+id/etAge_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -162,10 +162,10 @@
         android:inputType="number"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringAge_REG" />
 
     <EditText
-        android:id="@+id/etPlace"
+        android:id="@+id/etPlace_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -173,10 +173,10 @@
         android:inputType="text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringPlace_REG" />
 
     <EditText
-        android:id="@+id/etPhone"
+        android:id="@+id/etPhone_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:layout_marginStart="20dp"
@@ -184,7 +184,7 @@
         android:inputType="phone"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringCellPhone_REG" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -195,6 +195,6 @@
         android:inputType="textPassword"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPw_insert" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringPassword_REG" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/reg_title2"
+        android:id="@+id/tvSettings_US"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Altre impostazioni"
@@ -41,7 +41,7 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlace_US"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -53,7 +53,7 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace_US"
         app:layout_constraintEnd_toStartOf="@+id/etNewPassword_US"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/tvPlace"
+        android:id="@+id/tvPlace_US"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="250dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPlace"
+        android:id="@+id/tvStringPlace_US"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="260dp"
@@ -87,7 +87,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvPlace"
+        app:layout_constraintEnd_toStartOf="@+id/tvPlace_US"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -106,12 +106,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPlace_US" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnLogout_US"
         android:layout_width="160dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:backgroundTint="@color/red"
         android:padding="18dp"
         android:text="Logout"
@@ -119,9 +119,9 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/newAcc_btn"
+        app:layout_constraintEnd_toStartOf="@+id/btnNewAccount_UP"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPlace_US" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

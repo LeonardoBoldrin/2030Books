@@ -8,19 +8,19 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/ivUser_UP"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginBottom="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
-        app:layout_constraintBottom_toTopOf="@+id/tvEmail_UP"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringEmail_UP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvEmail_UP"
+        android:id="@+id/tvStringEmail_UP"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -29,23 +29,23 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringStart"
-        app:layout_constraintEnd_toStartOf="@+id/etEmail"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringNickname_UP"
+        app:layout_constraintEnd_toStartOf="@+id/etEmail_UP"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etNickname"
+        android:id="@+id/etNickname_UP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlace_UP"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringStart"
+        android:id="@+id/tvStringNickname_UP"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -54,32 +54,32 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace"
-        app:layout_constraintEnd_toStartOf="@+id/etNickname"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace_UP"
+        app:layout_constraintEnd_toStartOf="@+id/etNickname_UP"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmail_UP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/etNickname"
+        app:layout_constraintBottom_toTopOf="@+id/etNickname_UP"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/tvPlace"
+        android:id="@+id/tvPlace_UP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tvTime"
+        app:layout_constraintBottom_toTopOf="@+id/tvTime_UP"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/tvTime"
+        android:id="@+id/tvTime_UP"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringTime"
+        android:id="@+id/tvStringTime_UP"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -99,11 +99,11 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvTime"
+        app:layout_constraintEnd_toStartOf="@+id/tvTime_UP"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPlace"
+        android:id="@+id/tvStringPlace_UP"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -112,12 +112,12 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTime"
-        app:layout_constraintEnd_toStartOf="@+id/tvPlace"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringTime_UP"
+        app:layout_constraintEnd_toStartOf="@+id/tvPlace_UP"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/newAcc_btn"
+        android:id="@+id/btnNewAccount_UP"
         android:layout_width="160dp"
         android:layout_height="95dp"
         android:backgroundTint="@color/green"
@@ -131,7 +131,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_more_UP"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringTime" />
+        app:layout_constraintTop_toBottomOf="@+id/tvStringTime_UP" />
 
     <Button
         android:id="@+id/btn_more_UP"
@@ -148,6 +148,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTime_UP" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
