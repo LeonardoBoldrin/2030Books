@@ -47,7 +47,7 @@ public class AddBookActivity extends AppCompatActivity {
         // _________________________________________________________________________________________
         // Editore
 
-        srPublisher = binding.srPublisher;
+        srPublisher = binding.srPublisherAB;
 
 
         ArrayAdapter<String> publisherAdapter = getStringArrayAdapter(new String[]{
@@ -75,7 +75,7 @@ public class AddBookActivity extends AppCompatActivity {
         // _________________________________________________________________________________________
         // Genere
 
-        srGenre = binding.srGenre;
+        srGenre = binding.srGenreAB;
 
         ArrayAdapter<String> genreAdapter = getStringArrayAdapter(new String[]{
                 "Seleziona un genere", "Giallo", "Rosa", "Horror", "Fantasy",
@@ -113,9 +113,9 @@ public class AddBookActivity extends AppCompatActivity {
                     selectedAvailability = selectedRadioButton.getText().toString();
 
                     if (selectedAvailability.equals("Vendita")) {
-                        binding.etPrezzoCauzione.setHint("Prezzo");
+                        binding.etPriceLoanAB.setHint("Prezzo");
                     } else {
-                        binding.etPrezzoCauzione.setHint("Cauzione");
+                        binding.etPriceLoanAB.setHint("Cauzione");
                     }
                 }
             }
@@ -127,14 +127,14 @@ public class AddBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                selectedTitle = binding.etTitle.getText().toString();
+                selectedTitle = binding.etTitleAB.getText().toString();
 
                 if(selectedTitle.isEmpty()){
                     Toast.makeText(AddBookActivity.this, "Please enter a valid title", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                selectedAuthor = binding.etAuthor.getText().toString();
+                selectedAuthor = binding.etAuthorAB.getText().toString();
 
                 if(selectedAuthor.isEmpty()){
                     Toast.makeText(AddBookActivity.this, "Please enter a valid author", Toast.LENGTH_SHORT).show();
@@ -143,7 +143,7 @@ public class AddBookActivity extends AppCompatActivity {
 
                 //__________________________________________________________________________________
 
-                String priceString = binding.etPrezzoCauzione.getText().toString();
+                String priceString = binding.etPriceLoanAB.getText().toString();
 
                 if (priceString.isEmpty()) {
                     Toast.makeText(AddBookActivity.this, "Please enter a valid price", Toast.LENGTH_SHORT).show();
@@ -195,6 +195,7 @@ public class AddBookActivity extends AppCompatActivity {
                                 Toast.makeText(AddBookActivity.this, "Libro aggiunto correttamente", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(AddBookActivity.this, DashboardActivity.class);
                                 intent.putExtra("FRAGMENT_TO_LOAD", "MyBooksFragment");
+                                intent.putExtra("CHANGE_POSITION_TEXT", "I miei libri");
                                 startActivity(intent);
                             } else
                                 Toast.makeText(AddBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();

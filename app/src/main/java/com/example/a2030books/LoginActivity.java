@@ -38,18 +38,18 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.loginBtn.setOnClickListener(new View.OnClickListener() {
+        binding.btnLoginLOG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contentEmail = binding.usernameInput.getText().toString();
-                String contentPassword = binding.passwordInput.getText().toString();
+                String contentEmail = binding.etUserNameLOG.getText().toString();
+                String contentPassword = binding.etPasswordLOG.getText().toString();
                 
                 loginUser(contentEmail, contentPassword);
             }
         });
 
 
-        binding.createAccBtn.setOnClickListener(new View.OnClickListener() {
+        binding.btnCreateAccountLOG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);

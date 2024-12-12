@@ -24,7 +24,7 @@ public class TakeBookActivity extends AppCompatActivity {
 
         // intent.getStringExtra("USER_ID");
 
-        binding.tvTitleTakeBook.setText(intent.getStringExtra("BOOK_TITLE"));
-        binding.tvStringPriceTakebook.setText(String.valueOf(intent.getFloatExtra("BOOK_PRICE", 0.0f)) + "€");
+        binding.tvBookTB.setText(intent.getStringExtra("BOOK_TITLE"));
+        binding.tvPriceTB.setText(String.valueOf(intent.getFloatExtra("BOOK_PRICE", 0.0f)) + "€");
     }
 }
