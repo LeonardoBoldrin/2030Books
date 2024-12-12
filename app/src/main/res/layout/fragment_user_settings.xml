@@ -119,7 +119,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnNewAccount_UP"
+        app:layout_constraintEnd_toStartOf="@+id/btnChangePwd_US"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPlace_US" />
 

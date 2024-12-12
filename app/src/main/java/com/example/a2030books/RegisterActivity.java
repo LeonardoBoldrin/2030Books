@@ -33,20 +33,17 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         email = binding.etEmail.getText().toString();
-        nickname = binding.etNickname.getText().toString();
-        age = binding.etAge.getText().toString();
-        place = binding.etPlace.getText().toString();
-        tel = binding.etPhone.getText().toString();
+        nickname = binding.etNicknameREG.getText().toString();
+        age = binding.etAgeREG.getText().toString();
+        tel = binding.etPhoneREG.getText().toString();
         pwd = binding.etPassword.getText().toString();
-        // day = binding.etDay.getText().toString();
-        // hour = binding.etHour.getText().toString();
 
         String[] data = new String[]{email, pwd, nickname, age, place /*, day, hour*/, tel};
 
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.newAccBtn.setOnClickListener(new View.OnClickListener() {
+        binding.btnNewAccountREG.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUser(data);

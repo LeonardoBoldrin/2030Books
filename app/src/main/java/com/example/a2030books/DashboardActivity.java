@@ -16,7 +16,6 @@ import com.example.a2030books.databinding.ActivityDashboardBinding;
 public class DashboardActivity extends AppCompatActivity {
 
     private ActivityDashboardBinding binding;
-    private TextView tvPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +23,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        tvPosition = findViewById(R.id.tvPosition);
 
         binding.vHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         String fragmentToLoad = getIntent().getStringExtra("FRAGMENT_TO_LOAD");
+        String tvPositionString = getIntent().getStringExtra("CHANGE_POSITION_TEXT");
 
         if (fragmentToLoad != null) {
             if (fragmentToLoad.equals("MyBooksFragment"))
@@ -52,6 +50,10 @@ public class DashboardActivity extends AppCompatActivity {
         }
         else
             loadFragment(new DashboardButtonsFragment());
+
+        if(tvPositionString != null){
+            changePositionText(tvPositionString);
+        }
     }
 
     // Reusable method for fragment transactions

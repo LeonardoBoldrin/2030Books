@@ -64,7 +64,7 @@ public class SearchBookActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         usersRef = db.getReference("Users");
 
-        binding.btnSearch.setOnClickListener(new View.OnClickListener() {
+        binding.btnSearchSB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkAndRequestLocationPermission();
@@ -119,7 +119,7 @@ public class SearchBookActivity extends AppCompatActivity {
                     .addOnSuccessListener(location -> {
                         if (location != null) {
                             currentLocation = location;
-                            findBooks(binding.searchView.getText().toString());
+                            findBooks(binding.etSearchBookSB.getText().toString());
                         } else {
                             LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
                                     .setMinUpdateIntervalMillis(5000)
@@ -131,7 +131,7 @@ public class SearchBookActivity extends AppCompatActivity {
                                     Location location = locationResult.getLastLocation();
                                     if (location != null) {
                                         currentLocation = location;
-                                        findBooks(binding.searchView.getText().toString());
+                                        findBooks(binding.etSearchBookSB.getText().toString());
                                         fusedLocationClient.removeLocationUpdates(this);
                                     }
                                 }
