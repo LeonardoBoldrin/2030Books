@@ -105,16 +105,15 @@
         android:id="@+id/tvStringAvailable_AB"
         android:layout_width="125dp"
         android:layout_height="25dp"
-        android:layout_marginTop="52dp"
         android:text="Disponibile per: "
         android:textColor="@color/darkGreen"
         android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/etPriceLoan_AB"
         app:layout_constraintEnd_toStartOf="@+id/radioGroupDisponibilePer"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/srGenre_AB"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.602" />
 
     <RadioGroup
         android:id="@+id/radioGroupDisponibilePer"
