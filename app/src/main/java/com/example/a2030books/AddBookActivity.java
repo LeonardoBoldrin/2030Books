@@ -47,15 +47,8 @@ public class AddBookActivity extends AppCompatActivity {
         // _________________________________________________________________________________________
         // Editore
 
+
         srPublisher = binding.srPublisherAB;
-
-
-        ArrayAdapter<String> publisherAdapter = getStringArrayAdapter(new String[]{
-                "Seleziona un editore", "Mondadori", "Einaudi",
-                "Feltrinelli", "Giunti", "Laterza",
-                "Rizzoli", "Garzanti", "Salani"});
-
-        srPublisher.setAdapter(publisherAdapter);
 
         srPublisher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -75,15 +68,8 @@ public class AddBookActivity extends AppCompatActivity {
         // _________________________________________________________________________________________
         // Genere
 
+
         srGenre = binding.srGenreAB;
-
-        ArrayAdapter<String> genreAdapter = getStringArrayAdapter(new String[]{
-                "Seleziona un genere", "Giallo", "Rosa", "Horror", "Fantasy",
-                "Fantascientifico", "Storico", "Umoristico",
-                "Avventura", "Auto_Biografia"});
-
-        // Attach the adapter to the spinner
-        srGenre.setAdapter(genreAdapter);
 
         srGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -130,14 +116,14 @@ public class AddBookActivity extends AppCompatActivity {
                 selectedTitle = binding.etTitleAB.getText().toString();
 
                 if(selectedTitle.isEmpty()){
-                    Toast.makeText(AddBookActivity.this, "Please enter a valid title", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBookActivity.this, "Per favore, inserisci un titolo", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 selectedAuthor = binding.etAuthorAB.getText().toString();
 
                 if(selectedAuthor.isEmpty()){
-                    Toast.makeText(AddBookActivity.this, "Please enter a valid author", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBookActivity.this, "Per favore, inserisci un autore", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -146,29 +132,30 @@ public class AddBookActivity extends AppCompatActivity {
                 String priceString = binding.etPriceLoanAB.getText().toString();
 
                 if (priceString.isEmpty()) {
-                    Toast.makeText(AddBookActivity.this, "Please enter a valid price", Toast.LENGTH_SHORT).show();
-                    return; // Stop further processing
+                    Toast.makeText(AddBookActivity.this, "Per favore, inserisci un prezzo", Toast.LENGTH_SHORT).show();
+                    return;
                 } else {
                     selectedPrice = Float.parseFloat(priceString);
+                }
+
+                if(selectedPublisher.equals(srPublisher.getItemAtPosition(0))){
+                    Toast.makeText(AddBookActivity.this, "Per favore, seleziona un editore", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(selectedGenre.equals(srGenre.getItemAtPosition(0))) {
+                    Toast.makeText(AddBookActivity.this, "Per favore, seleziona un genere", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(selectedAvailability == null){
+                    Toast.makeText(AddBookActivity.this, "Per favore, seleziona la disponibilità", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 addBookToDb();
             }
         });
-    }
-
-    private @NonNull ArrayAdapter<String> getStringArrayAdapter(String[] stringArray) {
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                AddBookActivity.this,
-                android.R.layout.simple_spinner_item,  // Built-in layout for the Spinner
-                stringArray
-        );
-
-        // Set dropdown layout style
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        return adapter;
     }
 
         // _________________________________________________________________________________________

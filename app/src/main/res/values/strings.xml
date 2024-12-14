@@ -45,15 +45,22 @@
     </string>
 
     <string-array name="genere_options">
-        <item>Fiction</item>
-        <item>Non-Fiction</item>
-        <item>Science Fiction</item>
+        <item>Seleziona un genere...</item>
+        <item>Giallo</item>
+        <item>Rosa</item>
+        <item>Horror</item>
         <item>Fantasy</item>
-        <item>Biography</item>
-        <item>Mystery</item>
+        <item>Fantascientifico</item>
+        <item>Storico</item>
+        <item>Rosa</item>
+        <item>Umoristico</item>
+        <item>Avventura</item>
+        <item>Biografia</item>
+        <item>AutoBiografia</item>
     </string-array>
 
     <string-array name="editore_options">
+        <item>Seleziona un editore...</item>
         <item>Mondadori</item>
         <item>Einaudi</item>
         <item>Feltrinelli</item>
@@ -63,8 +70,48 @@
         <item>Garzanti</item>
         <item>Salani</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="day_options">
+        <item>Giorno</item>
+        <item>Lunedì</item>
+        <item>Martedì</item>
+        <item>Mercoledì</item>
+        <item>Giovedì</item>
+        <item>Venerdì</item>
+        <item>Sabato</item>
+        <item>Domenica</item>
+    </string-array>
+
+    <string-array name="hour_options">
+        <item>Ora</item>
+        <item>08:00</item>
+        <item>08:30</item>
+        <item>09:00</item>
+        <item>09:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+        <item>18:30</item>
+        <item>19:00</item>
+        <item>19:30</item>
+        <item>20:00</item>
+    </string-array>
+
+
 
 
 </resources>

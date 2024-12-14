@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -65,23 +64,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailREG"
         app:layout_constraintVertical_bias="0.023" />
 
-    <TextView
-        android:id="@+id/tvStringCellPhone_REG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Numero di cellulare"
-        android:textColor="@color/darkGreen"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintVertical_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etAge_REG" />
 
     <TextView
         android:id="@+id/tvStringPassword_REG"
@@ -95,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPhone_REG"
+        app:layout_constraintTop_toBottomOf="@+id/etAge_REG"
         app:layout_constraintVertical_bias="0.042" />
 
     <Button
@@ -128,13 +113,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tvStingNickname_REG" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmailREG"
         android:layout_width="370dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStringEmail_REG" />
 
@@ -142,32 +127,22 @@
         android:id="@+id/etAge_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="number"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStringAge_REG" />
 
-    <EditText
-        android:id="@+id/etPhone_REG"
-        android:layout_width="370dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringCellPhone_REG" />
 
     <EditText
         android:id="@+id/etPassword_REG"
         android:layout_width="370dp"
         android:layout_height="45dp"
-        android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="textPassword"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStringPassword_REG" />
 
@@ -176,59 +151,50 @@
         android:id="@+id/tvStringDay_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="90dp"
         android:text=" Giorno di reperibilità"
         android:textColor="@color/darkGreen"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword_REG"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintBottom_toTopOf="@+id/srDayWeek_REG"
+        app:layout_constraintEnd_toStartOf="@+id/srHour_REG"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/srDayWeek_REG"
         android:layout_width="230dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="148dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginBottom="70dp"
+        android:entries="@array/day_options"
         android:background="@drawable/border_background"
-        android:entries="@array/editore_options"
         android:textColor="@color/darkGreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringDay_REG" />
+        app:layout_constraintBottom_toTopOf="@+id/btnNewAccount_REG"
+        app:layout_constraintEnd_toStartOf="@+id/srHour_REG"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
         android:id="@+id/tvStringHour_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="90dp"
         android:text=" Orario"
         android:textColor="@color/darkGreen"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.702"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword_REG"
-        app:layout_constraintVertical_bias="0.045" />
+        app:layout_constraintBottom_toTopOf="@+id/srHour_REG"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
         android:id="@+id/srHour_REG"
         android:layout_width="135dp"
         android:layout_height="45dp"
-        android:layout_marginStart="256dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/border_background"
-        android:entries="@array/editore_options"
         android:textColor="@color/darkGreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringDay_REG"
-        app:layout_constraintVertical_bias="0.533" />
+        android:entries="@array/hour_options"
+        app:layout_constraintBottom_toTopOf="@+id/btnNewAccount_REG"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

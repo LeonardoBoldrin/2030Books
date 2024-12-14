@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -11,7 +10,6 @@
         android:id="@+id/ivUser_UP"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginBottom="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
         app:layout_constraintBottom_toTopOf="@+id/tvStringEmail_UP"
@@ -48,8 +46,8 @@
         android:id="@+id/tvStringNickname_UP"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="35dp"
         android:text="Nickname"
         android:textColor="@color/darkGreen"
         android:textSize="20sp"
@@ -58,10 +56,10 @@
         app:layout_constraintEnd_toStartOf="@+id/etNickname_UP"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/etEmail_UP"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:inputType="text"
@@ -74,21 +72,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="35dp"
         android:text="Luogo"
         android:textColor="@color/darkGreen"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringDay_UP"
         app:layout_constraintEnd_toStartOf="@+id/ivDirections_UP"
         app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="392dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnNewAccount_UP"
         android:layout_width="160dp"
         android:layout_height="95dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
         android:backgroundTint="@color/green"
         android:padding="18dp"
         android:text="Cambia Impostazioni"
@@ -97,16 +95,15 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_more_UP"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srDayWeek_UP" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
         android:id="@+id/btn_more_UP"
         android:layout_width="158dp"
         android:layout_height="96dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="25dp"
         android:backgroundTint="@color/green"
         android:padding="18dp"
         android:text="Altre Impostazioni"
@@ -114,10 +111,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/srHour_UP" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/ivDirections_UP"
@@ -125,8 +119,7 @@
         android:layout_height="48dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile"
+        android:src="@drawable/google_maps"
         app:layout_constraintBottom_toTopOf="@+id/tvStringHour_REG"
         app:layout_constraintEnd_toStartOf="@+id/btn_ChangePlace" />
 
@@ -149,61 +142,51 @@
         android:id="@+id/tvStringDay_UP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginStart="15dp"
         android:text="Reperibilità"
         android:textColor="@color/darkGreen"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringPlace_UP"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/srDayWeek_UP"
+        app:layout_constraintEnd_toStartOf="@+id/tvStringHour_REG"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/srDayWeek_UP"
         android:layout_width="230dp"
         android:layout_height="45dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/border_background"
-        android:entries="@array/editore_options"
+        android:entries="@array/day_options"
         android:textColor="@color/darkGreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringDay_UP"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintBottom_toTopOf="@+id/btnNewAccount_UP"
+        app:layout_constraintEnd_toStartOf="@+id/srHour_UP"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvStringHour_REG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginEnd="95dp"
         android:text=" Orario"
         android:textColor="@color/darkGreen"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.742"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringPlace_UP"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/srHour_UP"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Spinner
         android:id="@+id/srHour_UP"
         android:layout_width="135dp"
         android:layout_height="45dp"
-        android:layout_marginStart="260dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/border_background"
-        android:entries="@array/editore_options"
+        android:entries="@array/hour_options"
         android:textColor="@color/darkGreen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStringDay_UP"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_more_UP"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

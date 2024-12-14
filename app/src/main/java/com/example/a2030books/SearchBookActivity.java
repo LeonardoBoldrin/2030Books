@@ -169,10 +169,11 @@ public class SearchBookActivity extends AppCompatActivity {
                             // Assuming 'Book' has the correct properties mapped to database fields
                             bookInfo.setTitle(bookTitle);
                             bookList.add(bookInfo);
-                            findUsersInRange();
                         }
                     }
                 }
+                deleteDynamicRows();
+                findUsersInRange();
             } else {
                 Log.d("Error: ", task.getException().getMessage());
             }
@@ -186,6 +187,12 @@ public class SearchBookActivity extends AppCompatActivity {
         AtomicInteger completedOperations = new AtomicInteger(0);
 
         int i = 0;
+
+
+        if(bookList.isEmpty()) {
+            Toast.makeText(SearchBookActivity.this, "Nessun libro trovato nelle vicinanze", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         for (Book book : bookList) {
 
@@ -212,7 +219,7 @@ public class SearchBookActivity extends AppCompatActivity {
                                 float distance = results[0]; // Distance in meters
 
                                 // Add the book if distance is less than 5Km
-                                if (distance > RADIUS_METERS) {
+                                if (distance > RADIUS_METERS) { // TODO
                                     synchronized (booksInRange) {
                                         booksInRange.add(book);
                                     }
@@ -234,14 +241,9 @@ public class SearchBookActivity extends AppCompatActivity {
 
     private void populateTable() {
 
-        deleteDynamicRows();
-
         TableLayout tableLayout = binding.TableLayout;
 
         int i = 0;
-
-        if(bookList.isEmpty())
-            Toast.makeText(SearchBookActivity.this, "Nessun libro trovato nelle vicinanze", Toast.LENGTH_SHORT).show();
 
         for (Book book : bookList) {
 
