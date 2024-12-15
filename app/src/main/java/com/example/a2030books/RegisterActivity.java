@@ -1,16 +1,30 @@
 package com.example.a2030books;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.a2030books.databinding.ActivityRegisterBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -32,8 +46,13 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner srDay;
     private Spinner srHour;
     private String pwd;
+    
     private FirebaseDatabase db;
     private DatabaseReference userRef;
+
+    private FusedLocationProviderClient fusedLocationClient;
+    private boolean isLocationSet;
+    private Location currentLocation;
 
     private String[] data;
 
@@ -50,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         srDay = binding.srDayWeekREG;
         srHour = binding.srHourREG;
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         srDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 for(String el : data){
 
-                    if(el == null) {
+                    if(el == null || el.isEmpty()) {
                         Toast.makeText(RegisterActivity.this, "Compila tutti i campi", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -119,14 +140,33 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-
-        // This function also logs in the user
-        auth.createUserWithEmailAndPassword(data[0], data[1])
+        auth.createUserWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(RegisterActivity.this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "Registrat* correttamente!", Toast.LENGTH_SHORT).show();
-                        createInfoNode(data);
-                        startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                        builder.setMessage("Impostare il luogo in cui si è adesso come luogo di incontro per vendere e prestare libri?")
+                                .setTitle("Posizione");
+
+                        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss(); // Makes the dialog disappear
+                                checkAndRequestLocationPermission();
+                            }
+                        });
+
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                isLocationSet = false;
+                                createInfoNode();
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             Toast.makeText(RegisterActivity.this, "Email già in uso", Toast.LENGTH_SHORT).show();
@@ -139,7 +179,98 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    private void createInfoNode(String[] data) {
+
+    private void checkAndRequestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Request permission
+            ActivityCompat.requestPermissions(RegisterActivity.this,
+                    new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        } else {
+            // Permission is already granted
+            getUserLocation();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                getUserLocation();
+            } else {
+                // Permission denied
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setMessage("La posizione è importante perchè ci serve per trovare i libri vicini a te, " +
+                                   "ricordati che puoi sempre attivare i permessi di posizione da App->2030Books->Autorizzazioni ")
+                        .setTitle("Posizione");
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss(); // Makes the dialog disappear
+                    }
+                });
+
+                isLocationSet = false;
+
+                builder.create().show();
+            }
+        }
+    }
+
+    private void getUserLocation() {
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(location -> {
+                        if (location != null) {
+                            isLocationSet = true;
+                            currentLocation = location;
+                            createInfoNode(); // Call createInfoNode after location is retrieved
+                        } else {
+                            requestLocationUpdates(); // Trigger location updates if the last location is unavailable
+                        }
+                    });
+
+        } else {
+            Toast.makeText(this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void requestLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+        LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
+                .setMinUpdateIntervalMillis(5000)
+                .build();
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                Location location = locationResult.getLastLocation();
+                if (location != null) {
+                    isLocationSet = true;
+                    currentLocation = location;
+                    fusedLocationClient.removeLocationUpdates(this);
+                    createInfoNode(); // Call createInfoNode after location is retrieved
+
+                }
+            }
+        };
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+
+    } else{
+            Toast.makeText(this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void createInfoNode() {
         userRef = db.getReference("Users");
 
         HashMap<String, Object> infoHash = new HashMap<>();
@@ -147,10 +278,24 @@ public class RegisterActivity extends AppCompatActivity {
         infoHash.put("Hour", selectedHour);
         infoHash.put("Email", email);
         infoHash.put("Nickname", nickname);
-        // infoHash.put("Latitude", latitude);
-        // infoHash.put("Longitude", longitude);
+
+        if (isLocationSet && currentLocation != null) {
+            infoHash.put("Latitude", currentLocation.getLatitude());
+            infoHash.put("Longitude", currentLocation.getLongitude());
+        }
 
         userRef.child(auth.getUid())
-                .child("Info").setValue(infoHash);
+                .child("Info").setValue(infoHash)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("RegisterActivity", "Info node created successfully");
+                    } else {
+                        Log.d("RegisterActivity", "Failed to create info node: " + task.getException().getMessage());
+                    }
+                });
+
+        Toast.makeText(RegisterActivity.this, "Registrat* correttamente!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
     }
+
 }

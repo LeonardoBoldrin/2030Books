@@ -1,11 +1,12 @@
 package com.example.a2030books;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -14,8 +15,13 @@ import android.widget.Toast;
 import com.example.a2030books.databinding.ActivityAddBookBinding;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,13 +42,26 @@ public class AddBookActivity extends AppCompatActivity {
     private String selectedAvailability;
     private float selectedPrice;
 
+    private FirebaseDatabase db;
+    private DatabaseReference usersRef;
+
+    private FusedLocationProviderClient fusedLocationClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
+
+        usersRef = db.getReference("Users");
+
         binding = ActivityAddBookBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        checkLocation();
 
         // _________________________________________________________________________________________
         // Editore
@@ -158,7 +177,62 @@ public class AddBookActivity extends AppCompatActivity {
         });
     }
 
-        // _________________________________________________________________________________________
+    private void checkLocation() {
+        if (ContextCompat.checkSelfPermission(AddBookActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+            builder.setMessage("Non puoi aggiungere libri se non hai fornito i permessi di posizione!")
+                    .setTitle("Errore");
+
+            builder.setPositiveButton("Fornisci posizione", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss(); // Makes the dialog disappear
+
+                    // Request permission
+                    ActivityCompat.requestPermissions(AddBookActivity.this,
+                            new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                            1);
+                }
+            });
+
+            builder.setNegativeButton("Non fornire posizione",  new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss(); // Makes the dialog disappear
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                {
+                    // Permission denied
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+                    builder.setMessage("Permessi di posizione necessari per utilizzare l'applicazione")
+                            .setTitle("Errore");
+
+                    builder.setPositiveButton("Ok", (dialogInterface, i) -> {
+                        dialogInterface.dismiss(); // Makes the dialog disappear
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        }
+    }
+
+    // _________________________________________________________________________________________
 
     private void addBookToDb() {
 
@@ -171,9 +245,7 @@ public class AddBookActivity extends AppCompatActivity {
 
         // https://a2030books-default-rtdb.europe-west1.firebasedatabase.app
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
 
-        DatabaseReference usersRef = db.getReference("Users");
         usersRef.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                 .child("Books")
                 .child(selectedTitle).setValue(bookDetails)
@@ -189,7 +261,5 @@ public class AddBookActivity extends AppCompatActivity {
 
                     });
     }
-
-
 
 }

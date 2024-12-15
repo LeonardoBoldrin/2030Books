@@ -219,7 +219,7 @@ public class SearchBookActivity extends AppCompatActivity {
                                 float distance = results[0]; // Distance in meters
 
                                 // Add the book if distance is less than 5Km
-                                if (distance > RADIUS_METERS) { // TODO
+                                if (distance <= RADIUS_METERS) {
                                     synchronized (booksInRange) {
                                         booksInRange.add(book);
                                     }
