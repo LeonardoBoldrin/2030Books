@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.a2030books.Fragment.BooksTakenFragment;
 import com.example.a2030books.Fragment.DashboardButtonsFragment;
 import com.example.a2030books.Fragment.MyBooksFragment;
 import com.example.a2030books.Fragment.UserProfileFragment;
@@ -49,8 +50,6 @@ public class DashboardActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app");
         userRef = db.getReference("Users");
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -74,16 +73,20 @@ public class DashboardActivity extends AppCompatActivity {
         String fragmentToLoad = getIntent().getStringExtra("FRAGMENT_TO_LOAD");
         String tvPositionString = getIntent().getStringExtra("CHANGE_POSITION_TEXT");
 
+        if(tvPositionString != null){ // TODO
+            changePositionText(tvPositionString);
+        }
+
         if (fragmentToLoad != null) {
             if (fragmentToLoad.equals("MyBooksFragment"))
                 loadFragment(new MyBooksFragment());
+            else if(fragmentToLoad.equals("BooksTakenFragment")){
+                loadFragment(new BooksTakenFragment());
+            }
         }
         else
             loadFragment(new DashboardButtonsFragment());
 
-        if(tvPositionString != null){
-            changePositionText(tvPositionString);
-        }
     }
 
     // Reusable method for fragment transactions
@@ -100,6 +103,9 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     public void checkAndRequestLocationPermission() {
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         if (ContextCompat.checkSelfPermission(DashboardActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 

@@ -51,7 +51,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="38dp"
         android:ems="10"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/spEnd_TB"
@@ -75,13 +75,13 @@
         android:id="@+id/tvStringEnd_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
         android:layout_marginStart="10dp"
-        android:text="Fine prestito"
+        android:layout_marginBottom="35dp"
+        android:text="Giorni prestito"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPlace_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringTime_TB"
         app:layout_constraintEnd_toStartOf="@+id/spEnd_TB"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -89,9 +89,11 @@
         android:id="@+id/spEnd_TB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="35dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlace_TB"
+        android:background="@drawable/border_background"
+        android:entries="@array/lend_options"
+        app:layout_constraintBottom_toTopOf="@+id/tvTime_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -102,16 +104,6 @@
         android:layout_marginBottom="35dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tvStart_TB"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvPlace_TB"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="35dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTime_TB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -139,25 +131,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPlace_TB"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginStart="10dp"
-        android:text="Luogo"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTime_TB"
-        app:layout_constraintEnd_toStartOf="@+id/tvPlace_TB"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
         android:id="@+id/tvStringPrice_TB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="300dp"
         android:text="Prezzo"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -171,7 +149,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="300dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

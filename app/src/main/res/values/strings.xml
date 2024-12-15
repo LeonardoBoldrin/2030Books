@@ -111,7 +111,13 @@
         <item>20:00</item>
     </string-array>
 
-
+    <string-array name="lend_options">
+        <item>0</item>
+        <item>7</item>
+        <item>14</item>
+        <item>21</item>
+        <item>30</item>
+    </string-array>
 
 
 </resources>

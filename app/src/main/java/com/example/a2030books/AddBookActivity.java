@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -197,7 +198,7 @@ public class AddBookActivity extends AppCompatActivity {
                 }
             });
 
-            builder.setNegativeButton("Non fornire posizione",  new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("Non fornire posizione", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss(); // Makes the dialog disappear
@@ -209,25 +210,37 @@ public class AddBookActivity extends AppCompatActivity {
             dialog.show();
         }
 
-        if(!usersRef.child(FirebaseAuth.getInstance().getUid())
-                    .child("Info").get().getResult().hasChild("Latitude")){
+        // Correct the Firebase location check with an asynchronous call
+        usersRef.child(FirebaseAuth.getInstance().getUid())
+                .child("Info").child("Latitude")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult().exists()) {
+                        // The location exists, proceed with your logic
+                        // Continue the normal flow after checking location
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+                        builder.setMessage("Non puoi aggiungere libri se non hai impostato un luogo di ritrovo, impostalo da Impostazioni->pulsante \"Cambia\"")
+                                .setTitle("Errore");
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
-            builder.setMessage("Non puoi aggiungere libri se non hai impostato un luogo di ritrovo, impostalo da Impostazioni->pulsante \"Cambia")
-                    .setTitle("Errore");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss(); // Makes the dialog disappear
+                                finish();
+                            }
+                        });
 
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss(); // Makes the dialog disappear
-                    finish();
-                }
-            });
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure to get data from Firebase
+                    Log.e("FirebaseError", "Error fetching location data", e);
+                });
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

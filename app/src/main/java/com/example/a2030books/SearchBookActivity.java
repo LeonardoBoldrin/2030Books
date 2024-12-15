@@ -269,14 +269,38 @@ public class SearchBookActivity extends AppCompatActivity {
             tvAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // start the "TakeBookActivity" and pass the info about this book
+                    // Start the "TakeBookActivity" and pass the info about this book
                     Intent intent = new Intent(SearchBookActivity.this, TakeBookActivity.class);
                     intent.putExtra("BOOK_TITLE", book.getTitle());
                     intent.putExtra("BOOK_PRICE", book.getPrice());
+                    intent.putExtra("BOOK_AVAILABILITY", book.getAvailability());
+                    intent.putExtra("BOOK_AUTHOR", book.getAuthor());
                     intent.putExtra("USER_ID", usersIds.get(i_copy));
-                    startActivity(intent);
+
+                    // Get user info asynchronously
+                    usersRef.child(usersIds.get(i_copy))
+                            .child("Info")
+                            .get()
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    DataSnapshot infoNode = task.getResult();
+                                    String userHour = infoNode.child("Hour").getValue(String.class);
+                                    String userDay = infoNode.child("Day").getValue(String.class);
+
+                                    // Pass user information to the intent
+                                    intent.putExtra("USER_HOUR", userHour);
+                                    intent.putExtra("USER_DAY", userDay);
+
+                                    // Start the activity
+                                    startActivity(intent);
+                                } else {
+                                    // Handle failure to get user info
+                                    Toast.makeText(SearchBookActivity.this, "Failed to load user information", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 }
             });
+
 
             tableLayout.addView(row);
 
