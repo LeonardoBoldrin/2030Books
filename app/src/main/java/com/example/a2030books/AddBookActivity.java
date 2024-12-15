@@ -208,6 +208,25 @@ public class AddBookActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+
+        if(!usersRef.child(FirebaseAuth.getInstance().getUid())
+                    .child("Info").get().getResult().hasChild("Latitude")){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddBookActivity.this);
+            builder.setMessage("Non puoi aggiungere libri se non hai impostato un luogo di ritrovo, impostalo da Impostazioni->pulsante \"Cambia")
+                    .setTitle("Errore");
+
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss(); // Makes the dialog disappear
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     @Override

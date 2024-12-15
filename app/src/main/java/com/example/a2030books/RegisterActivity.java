@@ -51,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference userRef;
 
     private FusedLocationProviderClient fusedLocationClient;
-    private boolean isLocationSet;
     private Location currentLocation;
 
     private String[] data;
@@ -160,7 +159,6 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                isLocationSet = false;
                                 createInfoNode();
                             }
                         });
@@ -215,8 +213,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-                isLocationSet = false;
-
                 builder.create().show();
             }
         }
@@ -229,7 +225,6 @@ public class RegisterActivity extends AppCompatActivity {
             fusedLocationClient.getLastLocation()
                     .addOnSuccessListener(location -> {
                         if (location != null) {
-                            isLocationSet = true;
                             currentLocation = location;
                             createInfoNode(); // Call createInfoNode after location is retrieved
                         } else {
@@ -254,7 +249,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 Location location = locationResult.getLastLocation();
                 if (location != null) {
-                    isLocationSet = true;
                     currentLocation = location;
                     fusedLocationClient.removeLocationUpdates(this);
                     createInfoNode(); // Call createInfoNode after location is retrieved
@@ -279,7 +273,7 @@ public class RegisterActivity extends AppCompatActivity {
         infoHash.put("Email", email);
         infoHash.put("Nickname", nickname);
 
-        if (isLocationSet && currentLocation != null) {
+        if (currentLocation != null) {
             infoHash.put("Latitude", currentLocation.getLatitude());
             infoHash.put("Longitude", currentLocation.getLongitude());
         }
