@@ -86,6 +86,14 @@ public class DashboardButtonsFragment extends Fragment {
             }
         });
 
+        binding.btnReceiveContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((DashboardActivity) requireActivity()).loadFragment(new BooksTakenFragment());
+                ((DashboardActivity) requireActivity()).changePositionText("Libri presi");
+            }
+        });
+
         return binding.getRoot();
     }
 }

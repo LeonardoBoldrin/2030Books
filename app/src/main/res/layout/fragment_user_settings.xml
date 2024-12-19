@@ -41,7 +41,7 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlace_US"
+        app:layout_constraintBottom_toTopOf="@+id/tvRepeat_US"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/tvPlace_US"
+        android:id="@+id/tvRepeat_US"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="250dp"
@@ -87,7 +87,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvPlace_US"
+        app:layout_constraintEnd_toStartOf="@+id/tvRepeat_US"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -106,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlace_US" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRepeat_US" />
 
     <Button
         android:id="@+id/btnLogout_US"
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnChangePwd_US"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlace_US" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRepeat_US" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
