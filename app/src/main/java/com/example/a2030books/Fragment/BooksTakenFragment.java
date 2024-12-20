@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
@@ -31,7 +32,14 @@ public class BooksTakenFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((DashboardActivity) requireActivity()).changePositionText("Home");
-        requireActivity().getSupportFragmentManager().popBackStack();
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                ((DashboardActivity) requireActivity()).changePositionText("Home");
+                requireActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
     }
 
     @Override

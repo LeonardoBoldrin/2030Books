@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.activity.OnBackPressedCallback;
 
-import com.example.a2030books.Adapter.BooksAdapter;
+import com.example.a2030books.Adapter.MyBooksAdapter;
 import com.example.a2030books.DashboardActivity;
 import com.example.a2030books.TabelleDB.Book;
 import com.example.a2030books.databinding.FragmentMyBooksBinding;
@@ -34,7 +34,7 @@ public class MyBooksFragment extends Fragment {
     private DatabaseReference usersRef;
 
     private List<Book> bookList;
-    private BooksAdapter adapter;
+    private MyBooksAdapter adapter;
 
 
     public MyBooksFragment() {
@@ -72,13 +72,13 @@ public class MyBooksFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentMyBooksBinding.inflate(inflater, container, false);
 
-        binding.recyclerViewBooks2.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMyBooks.setLayoutManager(new LinearLayoutManager(getActivity()));
         bookList = new ArrayList<>(); // find all the books of a user and add the info here
 
         loadBooksFromDatabase();
 
-        adapter = new BooksAdapter(bookList);
-        binding.recyclerViewBooks2.setAdapter(adapter);
+        adapter = new MyBooksAdapter(bookList);
+        binding.rvMyBooks.setAdapter(adapter);
 
         return binding.getRoot();
     }

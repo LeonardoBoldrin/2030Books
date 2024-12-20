@@ -18,12 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookViewHolder> {
+public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.BookViewHolder> {
 
     private final List<Book> bookList;
 
     // Constructor for the adapter, taking in the list of books
-    public BooksAdapter(List<Book> bookList) {
+    public MyBooksAdapter(List<Book> bookList) {
         this.bookList = bookList;
     }
 
