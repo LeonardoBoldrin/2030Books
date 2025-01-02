@@ -116,7 +116,6 @@ public class DashboardActivity extends AppCompatActivity {
         } else {
             // Permission is already granted
             getUserLocation();
-            Log.d("BOLFO", "checkAndRequestLocationPermission: SONO QUA");
         }
     }
 

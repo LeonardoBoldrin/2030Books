@@ -59,6 +59,8 @@ public class BooksGivenFragment extends Fragment {
 
         binding = FragmentBooksGivenBinding.inflate(inflater, container, false);
 
+
+
         //__________________________________________________________________________________________
 
         binding.btnMyBooks.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +68,6 @@ public class BooksGivenFragment extends Fragment {
             public void onClick(View view) {
                 ((DashboardActivity) requireActivity()).loadFragment(new MyBooksFragment());
                 ((DashboardActivity) requireActivity()).changePositionText("I miei libri");
-
             }
         });
 

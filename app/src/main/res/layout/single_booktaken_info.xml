@@ -77,7 +77,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvReturn"
+            android:id="@+id/tvOwner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -102,7 +102,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvEnd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -108,8 +108,8 @@ public class MyBooksFragment extends Fragment {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getActivity(), "Error: "+error.getDetails(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
