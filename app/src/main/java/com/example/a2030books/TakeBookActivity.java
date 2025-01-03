@@ -2,6 +2,7 @@ package com.example.a2030books;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -100,12 +101,44 @@ public class TakeBookActivity extends AppCompatActivity {
                                             Toast.makeText(TakeBookActivity.this, "Libro aggiunto correttamente", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(TakeBookActivity.this, DashboardActivity.class);
                                             intent.putExtra("FRAGMENT_TO_LOAD", "BooksTakenFragment");
-                                            intent.putExtra("CHANGE_POSITION_TEXT", "Libri presi"); // TODO
+                                            intent.putExtra("CHANGE_POSITION_TEXT", "Libri presi");
                                             startActivity(intent);
                                         } else {
                                             Toast.makeText(TakeBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                            toAdd.clear();
+
+                            String userId = FirebaseAuth.getInstance().getUid(); // Get the current user ID
+                            if (userId != null) {
+                                userRef.child(userId)
+                                        .child("Info")
+                                        .child("Nickname").get()
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                String otherUserNickname = task1.getResult().getValue(String.class);
+                                                if (otherUserNickname != null) {
+                                                    Log.d("Firebase", "Nickname: " + otherUserNickname);
+                                                    toAdd.put("OtherUser", otherUserNickname);
+                                                } else {
+                                                    Log.d("Firebase", "Nickname not found.");
+                                                }
+                                            } else {
+                                                Log.e("Firebase", "Failed to fetch nickname.", task1.getException());
+                                            }
+
+                                            toAdd.put("Author", intent.getStringExtra("BOOK_AUTHOR"));
+                                            toAdd.put("End", userDay + " " + newDay);
+
+                                            userRef.child(ownerId)
+                                                    .child("Exchanges")
+                                                    .child("Given")
+                                                    .child(title).setValue(toAdd);
+                                        });
+                            } else {
+                                Log.e("Firebase", "No user is currently logged in.");
+                            }
                         }
                     }
                 });

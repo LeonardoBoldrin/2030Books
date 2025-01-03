@@ -27,7 +27,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvBook_BT"
+            android:id="@+id/tvBook_BG"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,9 +52,9 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvAuthor_BT"
+            android:id="@+id/tvAuthor_BG"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="end"
             android:textColor="@color/darkGreen"
@@ -72,12 +72,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Restituire a:"
+            android:text="Prestato a:"
             android:textColor="@color/darkGreen"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvOwner_BT"
+            android:id="@+id/tvOtherUser_BG"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,18 +97,36 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Entro:"
+            android:text="Restituzione:"
             android:textColor="@color/darkGreen"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tvEnd_BT"
+            android:id="@+id/tvEnd_BG"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
             android:textColor="@color/darkGreen"
             android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnReturned_BG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Segna come restuito"
+            android:textSize="20sp"
+            android:backgroundTint="@color/green"/>
+
     </LinearLayout>
 
 </LinearLayout>

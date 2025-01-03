@@ -49,10 +49,10 @@ public class BooksTakenAdapter extends RecyclerView.Adapter<BooksTakenAdapter.Vi
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvBook = itemView.findViewById(R.id.tvBook);
-            tvAuthor = itemView.findViewById(R.id.tvAuthor);
-            tvOwner = itemView.findViewById(R.id.tvOwner);
-            tvEnd = itemView.findViewById(R.id.tvEnd);
+            tvBook = itemView.findViewById(R.id.tvBook_BT);
+            tvAuthor = itemView.findViewById(R.id.tvAuthor_BT);
+            tvOwner = itemView.findViewById(R.id.tvOwner_BT);
+            tvEnd = itemView.findViewById(R.id.tvEnd_BT);
         }
     }
 }

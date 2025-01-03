@@ -47,26 +47,35 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.BookView
         holder.tvGenre.setText(book.getGenre());
         holder.tvAvailability.setText(book.getAvailability());
 
-        holder.btnDeleteBook.setOnClickListener(v -> {
-            DatabaseReference bookRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
-                    .getReference("Users")
-                    .child(FirebaseAuth.getInstance().getUid())
-                    .child("Books")
-                    .child(book.getTitle());
+        holder.btnDeleteBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            bookRef.removeValue().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    // Remove the book from the list and notify the adapter
-                    bookList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, bookList.size());
-                    Toast.makeText(v.getContext(), book.getTitle() + " eliminato", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(v.getContext(), "C'è stato un problema, riprova", Toast.LENGTH_SHORT).show();
+                int currentPosition = holder.getAdapterPosition(); // Get the correct position
+                if (currentPosition != RecyclerView.NO_POSITION) { // Check if the position is valid
+
+                DatabaseReference bookRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
+                        .getReference("Users")
+                        .child(FirebaseAuth.getInstance().getUid())
+                        .child("Books")
+                        .child(book.getTitle());
+
+                bookRef.removeValue().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Remove the book from the list and notify the adapter
+                        bookList.remove(currentPosition);
+                        MyBooksAdapter.this.notifyItemRemoved(currentPosition);
+                        MyBooksAdapter.this.notifyItemRangeChanged(currentPosition, bookList.size());
+                        Toast.makeText(v.getContext(), book.getTitle() + " eliminato", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(v.getContext(), "C'è stato un problema, riprova", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 }
-            });
+            }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -83,12 +92,12 @@ public class MyBooksAdapter extends RecyclerView.Adapter<MyBooksAdapter.BookView
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvAuthor = itemView.findViewById(R.id.tvAuthor);
-            tvGenre = itemView.findViewById(R.id.tvGenre);
-            tvAvailability = itemView.findViewById(R.id.tvAvailability);
+            tvTitle = itemView.findViewById(R.id.tvTitle_MB);
+            tvAuthor = itemView.findViewById(R.id.tvAuthor_MB);
+            tvGenre = itemView.findViewById(R.id.tvGenre_MB);
+            tvAvailability = itemView.findViewById(R.id.tvAvailability_MB);
 
-            btnDeleteBook = itemView.findViewById(R.id.btnDeleteBook_mybooks);
+            btnDeleteBook = itemView.findViewById(R.id.btnDeleteBook_MB);
         }
     }
 }
