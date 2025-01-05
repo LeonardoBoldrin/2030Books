@@ -63,7 +63,7 @@ public class UserSettingsFragment extends Fragment {
                 if(current.isEmpty() || newPwd.isEmpty() || confirm.isEmpty())
                     Toast.makeText(getActivity(), "Riempi tutti i campi", Toast.LENGTH_SHORT).show();
 
-                if(newPwd.equals(confirm))
+                else if(newPwd.equals(confirm))
                     reauthenticateUser(current, newPwd);
             }
         });

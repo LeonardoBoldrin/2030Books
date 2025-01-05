@@ -13,9 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2030books.R;
 import com.example.a2030books.TabelleDB.BookGiven;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -50,13 +56,14 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
                 int currentPosition = holder.getAdapterPosition(); // Get the correct position
                 if (currentPosition != RecyclerView.NO_POSITION) { // Check if the position is valid
                     BookGiven currentBookGiven = booksGivenList.get(currentPosition);
-                    DatabaseReference bookRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
-                            .getReference("Users")
-                            .child(FirebaseAuth.getInstance().getUid())
+
+                    DatabaseReference usersRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
+                            .getReference("Users");
+
+                    DatabaseReference bookRef = usersRef.child(FirebaseAuth.getInstance().getUid())
                             .child("Exchanges")
                             .child("Given")
                             .child(currentBookGiven.getTitle());
-
 
                     bookRef.removeValue().addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -66,6 +73,9 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
                             Toast.makeText(view.getContext(), bookGiven.getTitle() + " ti è stato restituito", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    getTakenReferenceByNickname(bookGiven.getOtherUser());
+
                 }
             }
         });
@@ -90,5 +100,44 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
 
             btnReturned = itemView.findViewById(R.id.btnReturned_BG);
         }
+    }
+
+    public void getTakenReferenceByNickname(String nickname) {
+        // Get a reference to the root of the database
+        DatabaseReference rootRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
+                .getReference("Users");
+
+        // Query to find the user with the specified nickname
+        Query query = rootRef.orderByChild("Info/Nickname").equalTo(nickname);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+
+                        // Get the reference to the Taken node
+                        DatabaseReference takenRef = userSnapshot.child("Exchanges/Taken").getRef();
+
+                        takenRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Log.d("TAG", "onComplete: takenRef cancelled ");
+                            }
+                        });
+
+                        // Break after finding the first match
+                        break;
+                    }
+                } else {
+                    Log.d("TAG", "No user found with nickname: " + nickname);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.err.println("Error querying database: " + databaseError.getMessage());
+            }
+        });
     }
 }
