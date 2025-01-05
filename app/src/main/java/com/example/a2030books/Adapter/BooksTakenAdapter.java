@@ -36,7 +36,15 @@ public class BooksTakenAdapter extends RecyclerView.Adapter<BooksTakenAdapter.Vi
         holder.tvBook.setText(bookTaken.getTitle());
         holder.tvAuthor.setText(bookTaken.getAuthor());
         holder.tvOwner.setText(bookTaken.getOwner());
-        holder.tvEnd.setText(bookTaken.getEnd());
+
+        String end = bookTaken.getEnd();
+
+        if(end.equals("Vendita")){
+            holder.tvOwnerString.setText("Proprietario:");
+            holder.tvEndString.setText("Tipo:");
+        }
+
+        holder.tvEnd.setText(end);
     }
 
     @Override
@@ -45,7 +53,7 @@ public class BooksTakenAdapter extends RecyclerView.Adapter<BooksTakenAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBook, tvAuthor, tvOwner, tvEnd;
+        TextView tvBook, tvAuthor, tvOwner, tvOwnerString, tvEnd, tvEndString;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +61,8 @@ public class BooksTakenAdapter extends RecyclerView.Adapter<BooksTakenAdapter.Vi
             tvAuthor = itemView.findViewById(R.id.tvAuthor_BT);
             tvOwner = itemView.findViewById(R.id.tvOwner_BT);
             tvEnd = itemView.findViewById(R.id.tvEnd_BT);
+            tvEndString = itemView.findViewById(R.id.tvEndString_BT);
+            tvOwnerString = itemView.findViewById(R.id.tvOwnerString_BT);
         }
     }
 }

@@ -159,16 +159,17 @@ public class SearchBookActivity extends AppCompatActivity {
                 for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
 
                     String user = userSnapshot.getKey();
-                    if(!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user))
-                        usersIds.add(user);
 
                     for (DataSnapshot bookSnapshot : userSnapshot.child("Books").getChildren()) {
                         String bookTitle = bookSnapshot.getKey();
                         Book bookInfo = bookSnapshot.getValue(Book.class);
                         if (bookTitle != null && bookInfo != null && bookTitle.equalsIgnoreCase(title) && !FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user)) {
-                            // Assuming 'Book' has the correct properties mapped to database fields
-                            bookInfo.setTitle(bookTitle);
-                            bookList.add(bookInfo);
+                            if(!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user)) {
+                                usersIds.add(user);
+                                // Assuming 'Book' has the correct properties mapped to database fields
+                                bookInfo.setTitle(bookTitle);
+                                bookList.add(bookInfo);
+                            }
                         }
                     }
                 }
@@ -275,6 +276,7 @@ public class SearchBookActivity extends AppCompatActivity {
                     intent.putExtra("BOOK_PRICE", book.getPrice());
                     intent.putExtra("BOOK_AVAILABILITY", book.getAvailability());
                     intent.putExtra("BOOK_AUTHOR", book.getAuthor());
+                    Log.d("TAG", "onClick: "+i_copy);
                     intent.putExtra("USER_ID", usersIds.get(i_copy));
 
                     // Get user info asynchronously
