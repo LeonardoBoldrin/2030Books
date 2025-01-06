@@ -19,21 +19,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringReservation_TB"
+        android:id="@+id/tvStringReservationBB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="1dp"
-        android:text="Prenotazione"
+        android:text="Acquisto"
         android:textColor="@color/green"
         android:textSize="44sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringBook_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringBookBB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/tvStringBook_TB"
+        android:id="@+id/tvStringBookBB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -42,97 +42,71 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringStart_TB"
-        app:layout_constraintEnd_toStartOf="@+id/tvBook_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringAuthor_BB"
+        app:layout_constraintEnd_toStartOf="@+id/tvBookBB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStart_TB"
+        android:id="@+id/tvBookBB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="35dp"
-        android:ems="10"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/spEnd_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvAuthor_BB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringStart_TB"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginStart="10dp"
-        android:text="Inizio prestito"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringEnd_TB"
-        app:layout_constraintEnd_toStartOf="@+id/tvStart_TB"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvStringEnd_TB"
+        android:id="@+id/tvStringAuthor_BB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="35dp"
-        android:text="Giorni prestito"
+        android:text="Autore"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringTime_TB"
-        app:layout_constraintEnd_toStartOf="@+id/spEnd_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringGenre_BB"
+        app:layout_constraintEnd_toStartOf="@+id/tvAuthor_BB"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/spEnd_TB"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:padding="3dp"
-        android:layout_marginBottom="35dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/border_background"
-        android:entries="@array/lend_options"
-        app:layout_constraintBottom_toTopOf="@+id/tvTime_TB"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <TextView
-        android:id="@+id/tvBook_TB"
+        android:id="@+id/tvAuthor_BB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="35dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvStart_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvGenre_BB"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/tvTime_TB"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPrice_TB"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/tvStringTime_TB"
+        android:id="@+id/tvStringGenre_BB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="35dp"
-        android:text="Ora"
+        android:text="Genere"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvStringPrice_TB"
-        app:layout_constraintEnd_toStartOf="@+id/tvTime_TB"
+        app:layout_constraintBottom_toTopOf="@+id/tvStringPriceBB"
+        app:layout_constraintEnd_toStartOf="@+id/tvGenre_BB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvStringPrice_TB"
+        android:id="@+id/tvGenre_BB"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="35dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPrice_BB"
+        app:layout_constraintEnd_toEndOf="parent" />
+    
+
+    <TextView
+        android:id="@+id/tvStringPriceBB"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -142,11 +116,11 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvPrice_TB"
+        app:layout_constraintEnd_toStartOf="@+id/tvPrice_BB"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvPrice_TB"
+        android:id="@+id/tvPrice_BB"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -156,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/btnTakeBook_TB"
+        android:id="@+id/btnTakeBookBB"
         android:layout_width="200dp"
         android:layout_height="81dp"
         android:backgroundTint="@color/green"
@@ -168,7 +142,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPrice_TB" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice_BB" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

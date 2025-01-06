@@ -20,14 +20,14 @@
 
     <EditText
         android:id="@+id/etSearchBook_SB"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="450dp"
-        android:layout_marginEnd="100dp"
         android:background="@drawable/searchview_border"
         android:hint="Inserisci il nome esatto del libro..."
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/flBtnSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,9 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="450dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etSearchBook_SB"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button

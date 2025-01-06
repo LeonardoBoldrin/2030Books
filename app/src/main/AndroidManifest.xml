@@ -15,7 +15,8 @@
         android:theme="@style/Theme._2030Books"
         tools:targetApi="31">
         <activity
-            android:name=".BooksTakenActivity"
+            android:name=".BuyBookActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".TakeBookActivity"

@@ -40,7 +40,7 @@ public class BooksTakenAdapter extends RecyclerView.Adapter<BooksTakenAdapter.Vi
         String end = bookTaken.getEnd();
 
         if(end.equals("Vendita")){
-            holder.tvOwnerString.setText("Proprietario:");
+            holder.tvOwnerString.setText("Prezzo:");
             holder.tvEndString.setText("Tipo:");
         }
 

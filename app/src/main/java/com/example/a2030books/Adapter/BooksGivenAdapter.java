@@ -48,37 +48,43 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
         holder.tvBook.setText(bookGiven.getTitle());
         holder.tvAuthor.setText(bookGiven.getAuthor());
         holder.tvOtherUser.setText(bookGiven.getOtherUser());
-        holder.tvEnd.setText(bookGiven.getEnd());
 
-        holder.btnReturned.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int currentPosition = holder.getAdapterPosition(); // Get the correct position
-                if (currentPosition != RecyclerView.NO_POSITION) { // Check if the position is valid
-                    BookGiven currentBookGiven = booksGivenList.get(currentPosition);
+        if(bookGiven.getEnd().equals("Vendita")){
+            holder.tvStringEnd.setText("Tipo");
+            holder.btnReturned.setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.btnReturned.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int currentPosition = holder.getAdapterPosition(); // Get the correct position
+                    if (currentPosition != RecyclerView.NO_POSITION) { // Check if the position is valid
+                        BookGiven currentBookGiven = booksGivenList.get(currentPosition);
 
-                    DatabaseReference usersRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
-                            .getReference("Users");
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
+                                .getReference("Users");
 
-                    DatabaseReference bookRef = usersRef.child(FirebaseAuth.getInstance().getUid())
-                            .child("Exchanges")
-                            .child("Given")
-                            .child(currentBookGiven.getTitle());
+                        DatabaseReference bookRef = usersRef.child(FirebaseAuth.getInstance().getUid())
+                                .child("Exchanges")
+                                .child("Given")
+                                .child(currentBookGiven.getTitle());
 
-                    bookRef.removeValue().addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            booksGivenList.remove(currentPosition);
-                            notifyItemRemoved(currentPosition);
-                            notifyItemRangeChanged(currentPosition, booksGivenList.size());
-                            Toast.makeText(view.getContext(), bookGiven.getTitle() + " ti è stato restituito", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        bookRef.removeValue().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                booksGivenList.remove(currentPosition);
+                                notifyItemRemoved(currentPosition);
+                                notifyItemRangeChanged(currentPosition, booksGivenList.size());
+                                Toast.makeText(view.getContext(), bookGiven.getTitle() + " ti è stato restituito", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    getTakenReferenceByNickname(bookGiven.getOtherUser());
+                        getTakenReferenceByNickname(bookGiven.getOtherUser());
 
+                    }
                 }
-            }
-        });
+            });
+        }
+        holder.tvEnd.setText(bookGiven.getEnd());
     }
 
     @Override
@@ -87,7 +93,7 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBook, tvAuthor, tvOtherUser, tvEnd;
+        TextView tvBook, tvAuthor, tvOtherUser, tvEnd, tvStringEnd;
 
         Button btnReturned;
 
@@ -97,6 +103,7 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
             tvAuthor = itemView.findViewById(R.id.tvAuthor_BG);
             tvOtherUser = itemView.findViewById(R.id.tvOtherUser_BG);
             tvEnd = itemView.findViewById(R.id.tvEnd_BG);
+            tvStringEnd = itemView.findViewById(R.id.tvEndString_BT);
 
             btnReturned = itemView.findViewById(R.id.btnReturned_BG);
         }

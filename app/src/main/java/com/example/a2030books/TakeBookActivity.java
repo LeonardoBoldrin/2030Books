@@ -58,7 +58,7 @@ public class TakeBookActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if(i == 0)
+                if (i == 0)
                     return;
 
                 newDay = addDaysToCalculatedDay(nextDay, Integer.parseInt(adapterView.getItemAtPosition(i).toString()));
@@ -76,78 +76,69 @@ public class TakeBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                userRef.child(ownerId)
-                        .child("Info")
-                        .child("Nickname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                    if (task.isSuccessful() && task.getResult() != null) {
-                                        toAdd.put("Type", intent.getStringExtra("BOOK_AVAILABILITY"));
-                                        toAdd.put("Author", intent.getStringExtra("BOOK_AUTHOR"));
-                                        toAdd.put("Owner", task.getResult().getValue(String.class));
+                toAdd.put("Type", "Prestito");
+                toAdd.put("Author", intent.getStringExtra("BOOK_AUTHOR"));
+                toAdd.put("Owner", intent.getStringExtra("USER_NICKNAME"));
 
-                                        if (newDay != 0) {
-                                            toAdd.put("End", userDay + " " + newDay);
-                                        } else {
-                                            Toast.makeText(TakeBookActivity.this, "Seleziona per quanti giorni vuoi il libro", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
+                if (newDay != 0) {
+                    toAdd.put("End", userDay + " " + newDay);
+                } else {
+                    Toast.makeText(TakeBookActivity.this, "Seleziona per quanti giorni vuoi il libro", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 
-                                        // Now set the value in Firebase
-                                        userRef.child(FirebaseAuth.getInstance().getUid())
-                                                .child("Exchanges")
-                                                .child("Taken")
-                                                .child(title).setValue(toAdd).addOnCompleteListener(task1 -> {
-                                                    if (task1.isSuccessful()) {
-                                                        Toast.makeText(TakeBookActivity.this, "Libro aggiunto correttamente", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(TakeBookActivity.this, DashboardActivity.class);
-                                                        intent.putExtra("FRAGMENT_TO_LOAD", "BooksTakenFragment");
-                                                        intent.putExtra("CHANGE_POSITION_TEXT", "Libri presi");
-                                                        startActivity(intent);
-                                                    } else {
-                                                        Toast.makeText(TakeBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-
-                                        toAdd.clear();
-
-                                        String userId = FirebaseAuth.getInstance().getUid(); // Get the current user ID
-                                        if (userId != null) {
-                                            userRef.child(userId)
-                                                    .child("Info")
-                                                    .child("Nickname").get()
-                                                    .addOnCompleteListener(task1 -> {
-                                                        if (task1.isSuccessful()) {
-                                                            String otherUserNickname = task1.getResult().getValue(String.class);
-                                                            if (otherUserNickname != null) {
-                                                                Log.d("Firebase", "Nickname: " + otherUserNickname);
-                                                                toAdd.put("OtherUser", otherUserNickname);
-                                                            } else {
-                                                                Log.d("Firebase", "Nickname not found.");
-                                                            }
-                                                        } else {
-                                                            Log.e("Firebase", "Failed to fetch nickname.", task1.getException());
-                                                        }
-
-                                                        toAdd.put("Author", intent.getStringExtra("BOOK_AUTHOR"));
-                                                        toAdd.put("End", userDay + " " + newDay);
-
-                                                        userRef.child(ownerId)
-                                                                .child("Exchanges")
-                                                                .child("Given")
-                                                                .child(title).setValue(toAdd);
-                                                    });
-                                        } else {
-                                            Log.e("Firebase", "No user is currently logged in.");
-                                        }
-                                    }
-                                }
+                // Now set the value in Firebase
+                userRef.child(FirebaseAuth.getInstance().getUid())
+                        .child("Exchanges")
+                        .child("Taken")
+                        .child(title).setValue(toAdd).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                Toast.makeText(TakeBookActivity.this, "Libro aggiunto correttamente", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(TakeBookActivity.this, DashboardActivity.class);
+                                intent.putExtra("FRAGMENT_TO_LOAD", "BooksTakenFragment");
+                                intent.putExtra("CHANGE_POSITION_TEXT", "Libri presi");
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(TakeBookActivity.this, "Failed to add book: " + Objects.requireNonNull(task1.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         });
+
+                toAdd.clear();
+
+                String userId = FirebaseAuth.getInstance().getUid(); // Get the current user ID
+                if (userId != null) {
+                    userRef.child(userId)
+                            .child("Info")
+                            .child("Nickname").get()
+                            .addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    String otherUserNickname = task1.getResult().getValue(String.class);
+                                    if (otherUserNickname != null) {
+                                        Log.d("Firebase", "Nickname: " + otherUserNickname);
+                                        toAdd.put("OtherUser", otherUserNickname);
+                                    } else {
+                                        Log.d("Firebase", "Nickname not found.");
+                                    }
+                                } else {
+                                    Log.e("Firebase", "Failed to fetch nickname.", task1.getException());
+                                }
+
+                                toAdd.put("Author", intent.getStringExtra("BOOK_AUTHOR"));
+                                toAdd.put("End", userDay + " " + newDay);
+
+                                userRef.child(ownerId)
+                                        .child("Exchanges")
+                                        .child("Given")
+                                        .child(title).setValue(toAdd);
+                            });
+                } else {
+                    Log.e("Firebase", "No user is currently logged in.");
+                }
             }
         });
-
     }
+
 
     private int findNextDay(String targetDay) {
 

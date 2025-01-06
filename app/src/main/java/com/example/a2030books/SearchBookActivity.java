@@ -271,35 +271,41 @@ public class SearchBookActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     // Start the "TakeBookActivity" and pass the info about this book
-                    Intent intent = new Intent(SearchBookActivity.this, TakeBookActivity.class);
-                    intent.putExtra("BOOK_TITLE", book.getTitle());
-                    intent.putExtra("BOOK_PRICE", book.getPrice());
-                    intent.putExtra("BOOK_AVAILABILITY", book.getAvailability());
-                    intent.putExtra("BOOK_AUTHOR", book.getAuthor());
-                    Log.d("TAG", "onClick: "+i_copy);
-                    intent.putExtra("USER_ID", usersIds.get(i_copy));
+                    Intent intent;
 
-                    // Get user info asynchronously
-                    usersRef.child(usersIds.get(i_copy))
-                            .child("Info")
-                            .get()
-                            .addOnCompleteListener(task -> {
-                                if (task.isSuccessful() && task.getResult() != null) {
-                                    DataSnapshot infoNode = task.getResult();
-                                    String userHour = infoNode.child("Hour").getValue(String.class);
-                                    String userDay = infoNode.child("Day").getValue(String.class);
+                    if(book.getAvailability().equals("Prestito")){
+                        intent = new Intent(SearchBookActivity.this, TakeBookActivity.class);
 
-                                    // Pass user information to the intent
-                                    intent.putExtra("USER_HOUR", userHour);
-                                    intent.putExtra("USER_DAY", userDay);
+                        // Get user info asynchronously
+                        usersRef.child(usersIds.get(i_copy))
+                                .child("Info")
+                                .get()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful() && task.getResult() != null) {
+                                        DataSnapshot infoNode = task.getResult();
+                                        String userHour = infoNode.child("Hour").getValue(String.class);
+                                        String userDay = infoNode.child("Day").getValue(String.class);
+                                        String userNickname = infoNode.child("Nickname").getValue(String.class);
 
-                                    // Start the activity
-                                    startActivity(intent);
-                                } else {
-                                    // Handle failure to get user info
-                                    Toast.makeText(SearchBookActivity.this, "Failed to load user information", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                        // Pass user information to the intent
+                                        intent.putExtra("USER_HOUR", userHour);
+                                        intent.putExtra("USER_DAY", userDay);
+                                        intent.putExtra("USER_NICKNAME", userNickname);
+
+                                        addCommonIntentExtras(intent, book, i_copy);
+
+                                    } else {
+                                        // Handle failure to get user info
+                                        Toast.makeText(SearchBookActivity.this, "Failed to load user information", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                    else {
+                        intent = new Intent(SearchBookActivity.this, BuyBookActivity.class);
+                        intent.putExtra("BOOK_GENRE", book.getGenre());
+
+                        addCommonIntentExtras(intent, book, i_copy);
+                    }
                 }
             });
 
@@ -322,5 +328,14 @@ public class SearchBookActivity extends AppCompatActivity {
                 tableLayout.removeViewAt(i);
             }
         }
+    }
+
+    private void addCommonIntentExtras(Intent intent, Book book, int index) {
+        intent.putExtra("BOOK_AUTHOR", book.getAuthor());
+        intent.putExtra("BOOK_TITLE", book.getTitle());
+        intent.putExtra("BOOK_PRICE", book.getPrice());
+        intent.putExtra("USER_ID", usersIds.get(index));
+
+        startActivity(intent);
     }
 }
