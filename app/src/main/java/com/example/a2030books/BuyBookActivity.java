@@ -65,8 +65,7 @@ public class BuyBookActivity extends AppCompatActivity {
                 toAdd.put("End", "Vendita");// and "Entro" becomes "Tipo"
 
                 DatabaseReference userRef = FirebaseDatabase.getInstance("https://a2030books-default-rtdb.europe-west1.firebasedatabase.app")
-                                                            .getReference("Users")
-                                                            .child(FirebaseAuth.getInstance().getUid());
+                                                            .getReference("Users");
 
                 // Now set the value in Firebase
                 userRef.child(FirebaseAuth.getInstance().getUid())
@@ -87,7 +86,8 @@ public class BuyBookActivity extends AppCompatActivity {
                 toAdd.remove("Owner");
                 toAdd.remove("Type");
 
-                userRef.child("Info/Nickname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                userRef.child(FirebaseAuth.getInstance().getUid())
+                        .child("Info/Nickname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         toAdd.put("OtherUser", task.getResult().getValue(String.class));

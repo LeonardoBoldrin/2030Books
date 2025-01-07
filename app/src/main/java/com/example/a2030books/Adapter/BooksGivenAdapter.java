@@ -50,8 +50,12 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
         holder.tvOtherUser.setText(bookGiven.getOtherUser());
 
         if(bookGiven.getEnd().equals("Vendita")){
-            holder.tvStringEnd.setText("Tipo");
-            holder.btnReturned.setVisibility(View.INVISIBLE);
+            holder.tvStringEnd.setText("Tipo:");
+
+            holder.tvStringOtherUser.setVisibility(View.GONE);
+            holder.tvOtherUser.setVisibility(View.GONE);
+
+            holder.btnReturned.setVisibility(View.GONE);
         }
         else {
             holder.btnReturned.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +97,7 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvBook, tvAuthor, tvOtherUser, tvEnd, tvStringEnd;
+        TextView tvBook, tvAuthor, tvOtherUser, tvStringOtherUser, tvEnd, tvStringEnd;
 
         Button btnReturned;
 
@@ -103,7 +107,8 @@ public class BooksGivenAdapter extends RecyclerView.Adapter<BooksGivenAdapter.Vi
             tvAuthor = itemView.findViewById(R.id.tvAuthor_BG);
             tvOtherUser = itemView.findViewById(R.id.tvOtherUser_BG);
             tvEnd = itemView.findViewById(R.id.tvEnd_BG);
-            tvStringEnd = itemView.findViewById(R.id.tvEndString_BT);
+            tvStringEnd = itemView.findViewById(R.id.tvStringEnd_BG);
+            tvStringOtherUser = itemView.findViewById(R.id.tvStringOtherUser_BG);
 
             btnReturned = itemView.findViewById(R.id.btnReturned_BG);
         }
