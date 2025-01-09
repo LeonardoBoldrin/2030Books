@@ -1,11 +1,15 @@
 package com.example.a2030books;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -52,6 +56,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        checkEnabledLocation(DashboardActivity.this);
 
         binding.vHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,6 +207,24 @@ public class DashboardActivity extends AppCompatActivity {
         if(currentLocation != null) {
             infoNode.child("Latitude").setValue(currentLocation.getLatitude());
             infoNode.child("Longitude").setValue(currentLocation.getLongitude());
+        }
+    }
+
+    public void checkEnabledLocation(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        boolean isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if(!isEnabled){
+            new AlertDialog.Builder(context)
+                    .setTitle("Posizione")
+                    .setMessage("La geolocalizzazione è necessaria per quest'app, per favore, attivala.")
+                    .setPositiveButton("Impostazioni", (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        context.startActivity(intent);
+                    })
+                    .setNegativeButton("Chiudi", (dialog, which) -> dialog.dismiss())
+                    .show();
         }
     }
 

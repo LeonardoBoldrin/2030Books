@@ -84,6 +84,9 @@ public class SearchBookActivity extends AppCompatActivity {
                     1);
         } else {
             // Permission is already granted
+            DashboardActivity dA = new DashboardActivity();
+            dA.checkEnabledLocation(SearchBookActivity.this);
+            Log.d("TAG", "onClick: premuto");
             getUserLocation();
         }
     }
@@ -246,6 +249,10 @@ public class SearchBookActivity extends AppCompatActivity {
 
         int i = 0;
 
+        if(bookList.isEmpty()){
+            Toast.makeText(this, "Nessun libro trovato nelle vicinanze", Toast.LENGTH_SHORT).show();
+        }
+
         for (Book book : bookList) {
 
             TableRow row = (TableRow) LayoutInflater.from(SearchBookActivity.this)
@@ -314,6 +321,7 @@ public class SearchBookActivity extends AppCompatActivity {
 
             i += 1;
         }
+
     }
 
     private void deleteDynamicRows() {

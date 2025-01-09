@@ -60,7 +60,7 @@ public class BuyBookActivity extends AppCompatActivity {
 
                 toAdd.put("Type", "Vendita");
                 toAdd.put("Author", author);
-                toAdd.put("Owner", price);  // because in BooksTakenAdapter if Availability == Vendita
+                toAdd.put("Owner", String.valueOf(price));  // because in BooksTakenAdapter if Availability == Vendita
                                             // then "Restituire a" becomes "Price"
                 toAdd.put("End", "Vendita");// and "Entro" becomes "Tipo"
 

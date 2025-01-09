@@ -60,16 +60,6 @@ public class UserProfileFragment extends Fragment {
 
         String userId = FirebaseAuth.getInstance().getUid();
 
-        binding.ivChangeNicknameUP.setOnClickListener(view -> {
-            String nickname = binding.etNicknameUP.getText().toString();
-
-            if (!nickname.isEmpty()) {
-                usersRef.child(userId).child("Info").child("Nickname").setValue(nickname);
-                Toast.makeText(getActivity(), "Nickname cambiato con successo!", Toast.LENGTH_SHORT).show();
-                ((DashboardActivity) requireActivity()).loadFragment(new UserProfileFragment());
-            }
-        });
-
         binding.btnChangePlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,7 +167,7 @@ public class UserProfileFragment extends Fragment {
 
                     // Set data to views
                     binding.tvEmailUP.setText(email != null ? email : "");
-                    binding.etNicknameUP.setHint(nickname != null ? nickname : "");
+                    binding.etNicknameUP.setText(nickname != null ? nickname : "");
 
                     String[] dayOptions = getResources().getStringArray(R.array.day_options);
                     for (int j = 0; j < dayOptions.length; j++) {
