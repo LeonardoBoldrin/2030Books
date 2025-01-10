@@ -72,7 +72,7 @@ public class UserProfileFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss(); // Makes the dialog disappear
-                        ((DashboardActivity) requireActivity()).checkAndRequestLocationPermission();
+                        ((DashboardActivity) requireActivity()).checkAndRequestLocationPermission(getActivity());
                     }
                 });
 

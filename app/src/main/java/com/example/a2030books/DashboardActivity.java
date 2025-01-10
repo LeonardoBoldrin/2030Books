@@ -1,6 +1,7 @@
 package com.example.a2030books;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -108,20 +109,20 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
-    public void checkAndRequestLocationPermission() {
+    public void checkAndRequestLocationPermission(Activity activity) {
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
-        if (ContextCompat.checkSelfPermission(DashboardActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Request permission
-            ActivityCompat.requestPermissions(DashboardActivity.this,
+            ActivityCompat.requestPermissions(activity,
                     new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
                     1);
         } else {
             // Permission is already granted
-            getUserLocation();
+            getUserLocation(DashboardActivity.this);
         }
     }
 
@@ -131,28 +132,16 @@ public class DashboardActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
-                getUserLocation();
+                getUserLocation(DashboardActivity.this);
             } else {
-                // Permission denied
-                AlertDialog.Builder builder = new AlertDialog.Builder(DashboardActivity.this);
-                builder.setMessage("La posizione è importante perchè ci serve per trovare i libri vicini a te, " +
-                                "ricordati che puoi sempre attivare i permessi di posizione da App->2030Books->Autorizzazioni ")
-                        .setTitle("Posizione");
-
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss(); // Makes the dialog disappear
-                    }
-                });
-
-                builder.create().show();
+                createAlertDialog("La posizione è importante perchè ci serve per trovare i libri vicini a te, " +
+                        "ricordati che puoi sempre attivare i permessi di posizione da App->2030Books->Autorizzazioni ", "Posizione", DashboardActivity.this);
             }
         }
     }
 
-    private void getUserLocation() {
-        if (ContextCompat.checkSelfPermission(DashboardActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    public void getUserLocation(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
             fusedLocationClient.getLastLocation()
@@ -161,18 +150,17 @@ public class DashboardActivity extends AppCompatActivity {
                             currentLocation = location;
                             changeInfoNode();
                         } else {
-                            Log.d("BOLFO", "getUserLocation: SONO QUA");
-                            requestLocationUpdates(); // Trigger location updates if the last location is unavailable
+                            requestLocationUpdates(DashboardActivity.this); // Trigger location updates if the last location is unavailable
                         }
                     });
 
         } else {
-            Toast.makeText(this, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Permessi di posizione non accettati", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void requestLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(DashboardActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+    private void requestLocationUpdates(Activity activity) {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationRequest locationRequest = new LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10000)
                     .setMinUpdateIntervalMillis(5000)
@@ -202,8 +190,6 @@ public class DashboardActivity extends AppCompatActivity {
         DatabaseReference infoNode = userRef.child(FirebaseAuth.getInstance().getUid())
                                             .child("Info");
 
-        Log.d("BOLFO", "changeInfoNode: SONO QUA");
-
         if(currentLocation != null) {
             infoNode.child("Latitude").setValue(currentLocation.getLatitude());
             infoNode.child("Longitude").setValue(currentLocation.getLongitude());
@@ -226,6 +212,23 @@ public class DashboardActivity extends AppCompatActivity {
                     .setNegativeButton("Chiudi", (dialog, which) -> dialog.dismiss())
                     .show();
         }
+    }
+
+    public void createAlertDialog(String msg, String title, Activity activity){
+        // Permission denied
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setMessage(msg)
+                .setTitle(title);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss(); // Makes the dialog disappear
+            }
+        });
+
+        builder.create().show();
     }
 
 }

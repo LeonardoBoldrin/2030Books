@@ -264,17 +264,17 @@ public class SearchBookActivity extends AppCompatActivity {
             TextView tvGenre = row.findViewById(R.id.tvGenre);
             TextView tvPublisher= row.findViewById(R.id.tvPublisher);
             TextView tvAuthor = row.findViewById(R.id.tvAuthor);
-            TextView tvAvailability = row.findViewById(R.id.tvAvailability);
+            TextView btnAvailability = row.findViewById(R.id.btnAvailability);
 
             tvTitle.setText(book.getTitle());
             tvGenre.setText(book.getGenre());
             tvPublisher.setText(book.getPublisher());
             tvAuthor.setText(book.getAuthor());
-            tvAvailability.setText(book.getAvailability());
+            btnAvailability.setText(book.getAvailability());
 
             int i_copy = i;
 
-            tvAvailability.setOnClickListener(new View.OnClickListener() {
+            btnAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Start the "TakeBookActivity" and pass the info about this book

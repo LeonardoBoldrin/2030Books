@@ -28,10 +28,15 @@ import com.google.android.gms.location.Priority;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -110,30 +115,60 @@ public class RegisterActivity extends AppCompatActivity {
 
                 email = binding.etEmailREG.getText().toString();
                 nickname = binding.etNicknameREG.getText().toString();
-                age = binding.etAgeREG.getText().toString();
-                pwd = binding.etPasswordREG.getText().toString();
 
-                if(selectedDay.equals(srDay.getItemAtPosition(0))){
-                    Toast.makeText(RegisterActivity.this, "Seleziona un giorno", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
 
-                if(selectedHour.equals(srHour.getItemAtPosition(0))){
-                    Toast.makeText(RegisterActivity.this, "Seleziona un'ora", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                            List<String> nicknames = new ArrayList<>();
 
-                data = new String[]{email, pwd, nickname, age, selectedDay, selectedHour};
+                            for(DataSnapshot userSnapshot : snapshot.getChildren()){
+                                String dbNickname = userSnapshot.child("Info/Nickname").getValue(String.class);
+                                if(dbNickname != null){
+                                    nicknames.add(dbNickname);
+                                }
+                            }
 
-                for(String el : data){
+                            if (nicknames.contains(nickname)){
+                                Toast.makeText(RegisterActivity.this, "Il nickname inserito esiste già", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                age = binding.etAgeREG.getText().toString();
+                                pwd = binding.etPasswordREG.getText().toString();
 
-                    if(el == null || el.isEmpty()) {
-                        Toast.makeText(RegisterActivity.this, "Compila tutti i campi", Toast.LENGTH_SHORT).show();
-                        return;
+                                if(selectedDay.equals(srDay.getItemAtPosition(0))){
+                                    Toast.makeText(RegisterActivity.this, "Seleziona un giorno", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                if(selectedHour.equals(srHour.getItemAtPosition(0))){
+                                    Toast.makeText(RegisterActivity.this, "Seleziona un'ora", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+
+                                data = new String[]{email, pwd, nickname, age, selectedDay, selectedHour};
+
+                                for(String el : data){
+
+                                    if(el == null || el.isEmpty()) {
+                                        Toast.makeText(RegisterActivity.this, "Compila tutti i campi", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                }
+                                registerUser();
+                            }
+                        }
+                        else{
+                            Log.d("TAG", "onDataChange: !snapshot.exists() ");
+                        }
                     }
-                }
 
-                registerUser();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("TAG", "onCancelled: Error in fetching the usernames");
+                    }
+                });
             }
         });
     }

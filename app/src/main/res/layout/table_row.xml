@@ -81,10 +81,12 @@
         android:layout_weight="1"
         android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tvAvailability"
+        <Button
+            android:id="@+id/btnAvailability"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
             android:padding="8dp"
             android:singleLine="true"
             android:ellipsize="none"
