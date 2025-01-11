@@ -4,13 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.a2030books.databinding.ActivityBuyBookBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,7 +89,13 @@ public class BuyBookActivity extends AppCompatActivity {
                     }
                 });
 
-                userRef.child(intent.getStringExtra("USER_ID"))
+                String owner = intent.getStringExtra("USER_ID");
+
+                userRef.child(owner)
+                        .child("Books")
+                        .child(title).removeValue();
+
+                userRef.child(owner)
                         .child("Exchanges")
                         .child("Given")
                         .child(title)

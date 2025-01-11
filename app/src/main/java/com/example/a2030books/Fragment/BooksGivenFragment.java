@@ -72,9 +72,25 @@ public class BooksGivenFragment extends Fragment {
 
         binding.recyclerViewBooksGiven.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        loadBooksFromDatabase();
+
         adapter = new BooksGivenAdapter(booksGivenList);
         binding.recyclerViewBooksGiven.setAdapter(adapter);
 
+        //__________________________________________________________________________________________
+
+        binding.btnMyBooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((DashboardActivity) requireActivity()).loadFragment(new MyBooksFragment());
+                ((DashboardActivity) requireActivity()).changePositionText("I miei libri");
+            }
+        });
+
+        return binding.getRoot();
+    }
+
+    private void loadBooksFromDatabase(){
         usersRef.child(FirebaseAuth.getInstance().getUid())
                 .child("Exchanges")
                 .child("Given").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -100,18 +116,6 @@ public class BooksGivenFragment extends Fragment {
                         Toast.makeText(getActivity(), "Error: "+error.getDetails(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        //__________________________________________________________________________________________
-
-        binding.btnMyBooks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((DashboardActivity) requireActivity()).loadFragment(new MyBooksFragment());
-                ((DashboardActivity) requireActivity()).changePositionText("I miei libri");
-            }
-        });
-
-        return binding.getRoot();
     }
 }
 

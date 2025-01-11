@@ -40,6 +40,7 @@ public class DashboardButtonsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -52,6 +53,7 @@ public class DashboardButtonsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Premi ancora per chiudere l'app", Toast.LENGTH_SHORT).show();
                 isBackPressed = true;
 
+                // 2 seconds timer
                 binding.getRoot().postDelayed(() -> isBackPressed = false, 2000);
             }
         });

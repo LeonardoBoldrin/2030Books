@@ -71,6 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        userRef = db.getReference("Users");
+
         srDay = binding.srDayWeekREG;
         srHour = binding.srHourREG;
 
@@ -204,7 +206,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             Toast.makeText(RegisterActivity.this, "Email già in uso", Toast.LENGTH_SHORT).show();
                         } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                            Toast.makeText(RegisterActivity.this, "Formato email non valido", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(RegisterActivity.this, "Registrazione fallita: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -300,7 +302,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createInfoNode() {
-        userRef = db.getReference("Users");
 
         HashMap<String, Object> infoHash = new HashMap<>();
         infoHash.put("Day", selectedDay);

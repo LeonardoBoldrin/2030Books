@@ -58,7 +58,7 @@ public class DashboardActivity extends AppCompatActivity {
         binding = ActivityDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        checkEnabledLocation(DashboardActivity.this);
+        checkEnabledLocation(this);
 
         binding.vHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +109,8 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
+    // LOCATION FUNCTIONS
+
     public void checkAndRequestLocationPermission(Activity activity) {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
@@ -122,7 +124,7 @@ public class DashboardActivity extends AppCompatActivity {
                     1);
         } else {
             // Permission is already granted
-            getUserLocation(DashboardActivity.this);
+            getUserLocation(activity);
         }
     }
 
@@ -132,10 +134,10 @@ public class DashboardActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted
-                getUserLocation(DashboardActivity.this);
+                getUserLocation(this);
             } else {
                 createAlertDialog("La posizione è importante perchè ci serve per trovare i libri vicini a te, " +
-                        "ricordati che puoi sempre attivare i permessi di posizione da App->2030Books->Autorizzazioni ", "Posizione", DashboardActivity.this);
+                        "ricordati che puoi sempre attivare i permessi di posizione da App->2030Books->Autorizzazioni ", "Posizione", this);
             }
         }
     }
@@ -150,7 +152,7 @@ public class DashboardActivity extends AppCompatActivity {
                             currentLocation = location;
                             changeInfoNode();
                         } else {
-                            requestLocationUpdates(DashboardActivity.this); // Trigger location updates if the last location is unavailable
+                            requestLocationUpdates(activity); // Trigger location updates if the last location is unavailable
                         }
                     });
 
@@ -169,7 +171,7 @@ public class DashboardActivity extends AppCompatActivity {
             LocationCallback locationCallback = new LocationCallback() {
                 @Override
                 public void onLocationResult(@NonNull LocationResult locationResult) {
-                    Log.d("BOLFO", "requestLocationUpdates: SONO QUA");
+
                     Location location = locationResult.getLastLocation();
                     if (location != null) {
                         currentLocation = location;

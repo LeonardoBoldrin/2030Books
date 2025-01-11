@@ -69,9 +69,6 @@ public class BooksTakenFragment extends Fragment {
 
         loadBooksFromDatabase();
 
-        if(bookTakenList.isEmpty())
-            Log.d("BOLFO", "onCreateView: lista vuota ");
-
         adapter = new BooksTakenAdapter(bookTakenList);
         binding.rvBooksTaken.setAdapter(adapter);
 

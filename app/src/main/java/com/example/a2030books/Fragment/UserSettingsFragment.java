@@ -82,7 +82,8 @@ public class UserSettingsFragment extends Fragment {
     }
 
     private void reauthenticateUser(final String current, final String newPassword) {
-        // Get the current user's email and password
+
+        // Get the current user's email
         String email = user.getEmail();
 
         // Create AuthCredential with current email and password

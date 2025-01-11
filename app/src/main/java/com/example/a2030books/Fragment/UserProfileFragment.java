@@ -136,12 +136,6 @@ public class UserProfileFragment extends Fragment {
                             String uri = "http://maps.google.com/maps?daddr=" + latitude + "," + longitude;
                             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                             startActivity(intent);
-                            intent.setPackage("com.google.android.apps.maps"); // Ensures only Google Maps is used
-                            if (intent.resolveActivity(requireActivity().getPackageManager()) != null) {
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getActivity(), "Google Maps non è installato", Toast.LENGTH_SHORT).show();
-                            }
                         } else {
                             Toast.makeText(requireActivity(), "Imposta un luogo di incontro prima!", Toast.LENGTH_SHORT).show();
                         }
@@ -151,8 +145,6 @@ public class UserProfileFragment extends Fragment {
                 });
             }
         });
-
-
 
         // Retrieve user data from Firebase asynchronously
         if (userId != null) {
