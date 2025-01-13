@@ -26,6 +26,8 @@ public class Book {
 
     public String getAuthor() { return Author; }
 
+    public void setAuthor(String author) { this.Author = author; }
+
     public String getGenre() { return Genre; }
 
     public String getPublisher() { return Publisher; }

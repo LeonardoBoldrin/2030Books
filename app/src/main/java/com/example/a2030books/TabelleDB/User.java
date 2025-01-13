@@ -6,24 +6,24 @@ public class User {
 
     private String email;
     private String nickname;
-    private Pair<Double, Double> place;
+    private Pair<Double, Double> place; // first = latitude, second = longitude
     private Pair<String, String> day_hour;
-    private String tel;
+
+    public User() {}
+
+    public User(String email, String nickname, Pair<Double, Double> place, Pair<String, String> day_hour, String tel) {
+        this.email = email;
+        this.nickname = nickname;
+        this.place = place;
+        this.day_hour = day_hour;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getNickname() {
         return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public double getLatitude(){
@@ -63,13 +63,5 @@ public class User {
 
     public void setHour(String hour){
         day_hour = new Pair<>(day_hour.first, hour);
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 }
